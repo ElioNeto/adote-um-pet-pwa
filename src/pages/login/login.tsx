@@ -2,7 +2,7 @@ import { FaGoogle, FaFacebook, FaApple } from "react-icons/fa";
 import "./login.css";
 import Logo from "../../assets/AdoteUmPet.svg";
 
-const hello = () => {
+const homeLogin = () => {
   window.location.href = "/home";
 };
 
@@ -18,7 +18,7 @@ export function Login() {
         <div className="forgot-container">
           <a href="/home">esqueceu sua senha?</a>
         </div>
-        <button onClick={hello}>Acessar</button>
+        <button onClick={homeLogin}>Acessar</button>
       </div>
       <div className="alternative">
         <div className="divider"></div>
