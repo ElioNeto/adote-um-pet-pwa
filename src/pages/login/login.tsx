@@ -1,6 +1,13 @@
-import { FaGoogle, FaFacebook, FaApple } from "react-icons/fa";
-import "./login.css";
-import Logo from "../../assets/AdoteUmPet.svg";
+
+import { FaGoogle,  FaFacebook, FaApple} from 'react-icons/fa';
+import './login.css'
+import Logo from '../../assets/AdoteUmPet.svg'
+
+const hello = () => {
+  
+  history.push('/home');
+};
+
 
 export function Login() {
   return (
@@ -14,7 +21,7 @@ export function Login() {
         <div className="forgot-container">
           <a href="/home">esqueceu sua senha?</a>
         </div>
-        <button>Acessar</button>
+        <button onClick={hello}>Acessar</button>
       </div>
       <div className="alternative">
         <div className="divider"></div>

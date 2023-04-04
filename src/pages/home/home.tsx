@@ -12,17 +12,17 @@ export function Home() {
           <div className="first-layer">
             <div className="btn-1">
               <FaSearch className="icon" />
-              <span>pesquisar</span>
+              <span>Pesquisar</span>
             </div>
           </div>
           <div className="second-layer">
             <div className="btn-2">
               <FaDog className="icon" />
-              <span>novo pet</span>
+              <span>Novo Pet</span>
             </div>
             <div className="btn-2">
               <FaHeart className="icon" />
-              <span>favoritos</span>
+              <span>Favoritos</span>
             </div>
           </div>
         </div>
