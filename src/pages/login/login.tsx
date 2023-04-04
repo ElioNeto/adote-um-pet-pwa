@@ -1,13 +1,10 @@
-
-import { FaGoogle,  FaFacebook, FaApple} from 'react-icons/fa';
-import './login.css'
-import Logo from '../../assets/AdoteUmPet.svg'
+import { FaGoogle, FaFacebook, FaApple } from "react-icons/fa";
+import "./login.css";
+import Logo from "../../assets/AdoteUmPet.svg";
 
 const hello = () => {
-  
-  history.push('/home');
+  window.location.href = "/home";
 };
-
 
 export function Login() {
   return (
