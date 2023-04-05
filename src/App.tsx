@@ -3,6 +3,9 @@ import { Login } from './pages/login/login';
 
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import { Home } from './pages/home/home';
+import { Signup } from './pages/signup/signup';
+import { Registerpet } from './pages/registerpet/registerpet';
+import { Search } from './pages/search/search';
 
 export default function App() {
   return (
@@ -10,6 +13,9 @@ export default function App() {
       <Routes>
         <Route path='/' element={<Login />} />
         <Route path='home' element={<Home/>}/>
+        <Route path='signup' element={<Signup/>}/>
+        <Route path='registerpet' element={<Registerpet/>}/>
+        <Route path='search' element={<Search/>}/>
       </Routes>
     </BrowserRouter>
   )
