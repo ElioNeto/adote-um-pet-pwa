@@ -4,7 +4,6 @@ import "./home.css";
 import { Card } from "../../components/card/card";
 import { BottomBar } from "../../components/bottom-bar/bottom-bar";
 
-
 const searchMenu = () => {
   window.location.href = "/search";
 };
@@ -16,7 +15,6 @@ const newPetMenu = () => {
 const favMenu = () => {
   window.location.href = "/favorites";
 };
-
 
 export function Home() {
   return (
@@ -46,12 +44,8 @@ export function Home() {
         <div className="carousel">
           <h2>Meus Pets</h2>
           <div className="cards">
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
+            <Card showActions />
+            <Card showActions />
           </div>
         </div>
       </div>

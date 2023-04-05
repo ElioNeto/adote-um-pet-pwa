@@ -14,8 +14,8 @@ export function Favorites() {
         <div className="carousel">
           <h2>Favoritos</h2>
           <div className="cards-fav">
-            <Card />
-            <Card />
+            <Card showActions={false} />
+            <Card showActions={false} />
           </div>
         </div>
       </div>
