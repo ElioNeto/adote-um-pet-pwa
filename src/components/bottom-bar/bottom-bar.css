@@ -1,0 +1,41 @@
+.bar-container {
+  height: 73px;
+  width: 100vw;
+  bottom: 0;
+  position: fixed;
+  background: #fff;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.item-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.item-menu > .icon-menu {
+  margin-bottom: 8px;
+  font-size: 16pt;
+  color: #ff5757;
+}
+
+.item-menu > span {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 100%;
+  /* identical to box height, or 10px */
+
+  /* Pet Adopt Color/Black Color Pet Dopt */
+
+  color: #ff5757;
+}
+
+.active {
+  color: #5f5b5b !important;
+}

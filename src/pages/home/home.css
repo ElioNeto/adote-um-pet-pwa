@@ -89,3 +89,12 @@ h2 {
 
   color: #eeeeee;
 }
+
+.carousel {
+  margin-top: 32px;
+}
+.cards {
+  margin-top: 16px;
+  display: flex;
+  overflow-x: scroll;
+}

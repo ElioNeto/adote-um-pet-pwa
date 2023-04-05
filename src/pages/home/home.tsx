@@ -1,6 +1,8 @@
 import { FaDog, FaHeart, FaSearch } from "react-icons/fa";
 import Logo from "../../assets/AdoteUmPet.svg";
 import "./home.css";
+import { Card } from "../../components/card/card";
+import { BottomBar } from "../../components/bottom-bar/bottom-bar";
 export function Home() {
   return (
     <>
@@ -28,10 +30,15 @@ export function Home() {
         </div>
         <div className="carousel">
           <h2>Meus Pets</h2>
-          <div className="card"></div>
+          <div className="cards">
+            <Card />
+            <Card />
+          </div>
         </div>
       </div>
-      <div className="menu"></div>
+      <div className="menu">
+        <BottomBar />
+      </div>
     </>
   );
 }
