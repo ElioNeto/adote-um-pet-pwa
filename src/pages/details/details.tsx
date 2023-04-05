@@ -3,6 +3,7 @@ import "./details.css";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { InfoCard } from "../../components/info-card/info-card";
+import { Header } from "../../components/header/header";
 
 export function Details() {
   const [name, setName] = useState();
@@ -77,7 +78,7 @@ export function Details() {
 
   return (
     <div className="detail-container">
-      <div className="header"></div>
+      <Header id={id} location="/home" showLike={!isHuman} />
       <div className="image">
         <img src={image} alt="gato ioda" />
       </div>
