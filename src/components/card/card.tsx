@@ -24,17 +24,7 @@ const PinkSwitch = styled(Switch)(({ theme }) => ({
 }));
 
 const label = { inputProps: { "aria-label": "Color switch demo" } };
-export function Card(props: {
-  isAdopt:
-    | string
-    | number
-    | boolean
-    | ReactElement<any, string | JSXElementConstructor<any>>
-    | ReactFragment
-    | ReactPortal
-    | null
-    | undefined;
-}) {
+export function Card() {
   return (
     <div className="card">
       <div className="photo">

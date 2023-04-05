@@ -72,3 +72,68 @@
 
   opacity: 0.5;
 }
+
+.slider-container > .details {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+  margin-bottom: 16px;
+}
+
+.slider-container > .profile {
+  display: flex;
+}
+
+.slider-container > .profile > img {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  margin-right: 8px;
+}
+
+.slider-container > .profile > .data-profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.slider-container > .profile > .data-profile > .title {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 120%;
+  /* identical to box height, or 12px */
+
+  letter-spacing: 0.01em;
+
+  color: #b4aeae;
+}
+
+.slider-container > .profile > .data-profile > .value {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 120%;
+  /* identical to box height, or 17px */
+
+  letter-spacing: 0.01em;
+
+  /* Pet Adopt Color/Black Color Pet Dopt */
+
+  color: #5f5b5b;
+}
+
+.slider-container > .bio {
+  max-height: 85px;
+  margin-top: 24px;
+  overflow-y: auto;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  /* or 21px */
+
+  letter-spacing: 0.01em;
+}

@@ -1,0 +1,35 @@
+.info-card {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: center;
+
+  background: #ffffff;
+  border: 1px solid #5f5b5b;
+  border-radius: 8px;
+
+  width: 66px;
+  height: 66px;
+}
+
+.info-card > .title {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 100%;
+  /* identical to box height, or 10px */
+
+  color: #5f5b5b;
+}
+
+.info-card > .value {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 100%;
+  /* identical to box height, or 12px */
+
+  color: #ff5757;
+}

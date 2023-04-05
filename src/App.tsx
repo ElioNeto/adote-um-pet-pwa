@@ -19,7 +19,7 @@ export default function App() {
         <Route path="registerpet" element={<Registerpet />} />
         <Route path="search" element={<Search />} />
         <Route path="favorites" element={<Favorites />} />
-        <Route path="detail" element={<Details />} />
+        <Route path="detail/:id" element={<Details />} />
       </Routes>
     </BrowserRouter>
   );
