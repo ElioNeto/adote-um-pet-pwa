@@ -1,4 +1,3 @@
-import { FaDog, FaHeart, FaSearch } from "react-icons/fa";
 import Logo from "../../assets/AdoteUmPet.svg";
 import "./favorites.css";
 import { Card } from "../../components/card/card";
