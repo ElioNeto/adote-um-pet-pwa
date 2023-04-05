@@ -4,6 +4,12 @@ import "./card.css";
 import Switch from "@mui/material/Switch";
 import { alpha, styled } from "@mui/material/styles";
 import { pink } from "@mui/material/colors";
+import {
+  ReactElement,
+  JSXElementConstructor,
+  ReactFragment,
+  ReactPortal,
+} from "react";
 
 const PinkSwitch = styled(Switch)(({ theme }) => ({
   "& .MuiSwitch-switchBase.Mui-checked": {
@@ -18,7 +24,17 @@ const PinkSwitch = styled(Switch)(({ theme }) => ({
 }));
 
 const label = { inputProps: { "aria-label": "Color switch demo" } };
-export function Card() {
+export function Card(props: {
+  isAdopt:
+    | string
+    | number
+    | boolean
+    | ReactElement<any, string | JSXElementConstructor<any>>
+    | ReactFragment
+    | ReactPortal
+    | null
+    | undefined;
+}) {
   return (
     <div className="card">
       <div className="photo">
@@ -31,6 +47,7 @@ export function Card() {
         <span>Samantha</span>
         <FaVenus className="genre" />
       </div>
+
       <div className="actions">
         <PinkSwitch {...label} defaultChecked />
         <span>Adotado</span>

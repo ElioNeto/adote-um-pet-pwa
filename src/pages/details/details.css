@@ -1,0 +1,74 @@
+.image > img {
+  height: 400px;
+  width: 100vw;
+}
+.slider-container {
+  background-color: #fff;
+  height: calc(100vh - 400px);
+  border-radius: 20px 20px 0px 0px;
+  position: relative;
+  top: -20px;
+
+  padding-top: 40px;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+.slider-container > .name-age {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.slider-container > .name-age > span.name {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 100%;
+  /* identical to box height, or 24px */
+
+  letter-spacing: 0.01em;
+
+  /* Pet Adopt Color/Black Color Pet Dopt */
+
+  color: #5f5b5b;
+}
+
+.slider-container > .name-age > .age {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 100%;
+  /* identical to box height, or 12px */
+
+  color: #ff5757;
+}
+
+.slider-container > div.location {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.slider-container > div.location .location-icon {
+  color: #ff5757;
+  font-size: 16px;
+  margin-right: 8px;
+}
+.slider-container > div.location > span.location {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+  /* identical to box height, or 14px */
+
+  /* Pet Adopt Color/Black Color Pet Dopt */
+
+  color: #5f5b5b;
+
+  opacity: 0.5;
+}
