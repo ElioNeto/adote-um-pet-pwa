@@ -1,101 +1,40 @@
-.logo {
+.logo-fav {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.logo > img {
-  width: 105px;
-  height: 100px;
+.logo-fav > img {
+  width: 189.82px;
+  height: 171.61px;
 }
 
-.container {
-  margin: 24px;
-}
-
-.buttons {
+.container-fav {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.first-layer {
-  display: flex;
-  width: 100%;
   align-items: center;
   justify-content: center;
-}
-.btn-1 {
-  display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  background: #ffffff;
-  border: 1px solid #ff5757;
-  border-radius: 25px;
-  padding: 8px;
+  margin: 0;
 }
 
-.icon {
-  font-size: 65px;
-  color: #ff5757;
-}
-.btn-1 > span,
-.btn-2 > span {
-  font-family: "Outfit";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 25px;
-  text-align: center;
-
-  color: #ff5757;
-
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
-
-.second-layer {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  width: 100%;
-  margin-top: 24px;
-}
-
-.btn-2 {
-  background: #ffffff;
-  border: 1px solid #ff5757;
-  border-radius: 25px;
-  padding: 8px;
-  display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  margin-right: 16px;
-}
-.btn-2:last-child {
-  margin-right: 0;
-}
-
-h2 {
+h2.fav-h2 {
   font-family: "Outfit";
   font-style: normal;
   font-weight: 500;
   font-size: 24px;
   line-height: 30px;
 
+  text-align: center;
+
   color: #eeeeee;
 }
 
-.carousel {
-  margin-top: 32px;
+.carousel-fav {
+  margin-top: 0;
 }
 .cards-fav {
   margin-top: 16px;
   display: flex;
   flex-direction: column;
   overflow-x: scroll;
+  align-items: center;
 }

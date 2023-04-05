@@ -7,12 +7,12 @@ import { BottomBar } from "../../components/bottom-bar/bottom-bar";
 export function Favorites() {
   return (
     <>
-      <div className="logo">
+      <div className="logo-fav">
         <img src={Logo} alt="logo" />
       </div>
-      <div className="container">
-        <div className="carousel">
-          <h2>Favoritos</h2>
+      <div className="container-fav">
+        <div className="carousel-fav">
+          <h2 className="fav-h2">Favoritos</h2>
           <div className="cards-fav">
             <Card showActions={false} />
             <Card showActions={false} />
