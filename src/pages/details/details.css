@@ -137,3 +137,33 @@
 
   letter-spacing: 0.01em;
 }
+
+.profile-button {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 25px;
+  gap: 10px;
+
+  width: 100%;
+
+  background: #ff5757;
+  border-radius: 8px;
+
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 120%;
+  /* identical to box height, or 17px */
+
+  letter-spacing: 0.01em;
+
+  color: #ffffff;
+}
+
+.human-bio {
+  max-height: 260px !important;
+}

@@ -20,6 +20,8 @@ export function Details() {
 
   let { id } = useParams();
 
+  let classes = "bio";
+
   useEffect(() => {
     fetch(`http://localhost:5000/profiles/${id}`)
       .then((response) => response.json())
@@ -37,6 +39,8 @@ export function Details() {
           setRace(data.animal_data.race);
           setWeight(data.animal_data.weight);
           getOwnerInformations(data.animal_data.owner_id);
+        } else {
+          document.getElementById("bio")!.classList.add("human-bio");
         }
       })
       .catch((err) => {
@@ -104,7 +108,12 @@ export function Details() {
           </>
         )}
 
-        <div className="bio">{bio}</div>
+        <div className="bio" id="bio">
+          {bio}
+        </div>
+        {!isHuman && (
+          <button className="profile-button">Tenho interesse</button>
+        )}
       </div>
     </div>
   );
