@@ -93,9 +93,9 @@ h2 {
 .carousel {
   margin-top: 32px;
 }
-.cards {
+.cards-fav {
   margin-top: 16px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   overflow-x: scroll;
 }
