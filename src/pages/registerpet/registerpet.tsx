@@ -34,6 +34,7 @@ export function Registerpet() {
           <input type="text" placeholder="Nome" name="petName"/>
           <input type="text" placeholder="Raça" name="petRace"/>
           <input type="text" placeholder="Localização" name="petLocation"/>
+          <input type="text" placeholder="Cor" name="petColor"/>
           <input type="text" placeholder="Peso" name="petWeight"/>
           <input type="text" placeholder="Idade" name="petAge"/>
           <input type="text" placeholder="Fale algo sobre o PET" name="petInfo"/>
