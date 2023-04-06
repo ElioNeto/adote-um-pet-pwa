@@ -8,6 +8,7 @@ import { Registerpet } from "./pages/registerpet/registerpet";
 import { Search } from "./pages/search/search";
 import { Details } from "./pages/details/details";
 import { Favorites } from "./pages/favorites/favorites";
+import { Chats } from "./pages/chats/chats";
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
         <Route path="search" element={<Search />} />
         <Route path="favorites" element={<Favorites />} />
         <Route path="detail/:id" element={<Details />} />
+        <Route path="chats" element={<Chats />} />
       </Routes>
     </BrowserRouter>
   );
