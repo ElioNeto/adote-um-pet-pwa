@@ -3,18 +3,7 @@ import Logo from "../../assets/AdoteUmPet.svg";
 import "./home.css";
 import { Card } from "../../components/card/card";
 import { BottomBar } from "../../components/bottom-bar/bottom-bar";
-
-const searchMenu = () => {
-  window.location.href = "/search";
-};
-
-const newPetMenu = () => {
-  window.location.href = "/registerpet";
-};
-
-const favMenu = () => {
-  window.location.href = "/favorites";
-};
+import { redirect } from "../../utils/utils";
 
 export function Home() {
   return (
@@ -25,17 +14,20 @@ export function Home() {
       <div className="container">
         <div className="buttons">
           <div className="first-layer">
-            <div className="btn-1" onClick={searchMenu}>
+            <div className="btn-1" onClick={() => {
+          redirect("/search")}}>
               <FaSearch className="icon" />
               <span>Pesquisar</span>
             </div>
           </div>
           <div className="second-layer">
-            <div className="btn-2" onClick={newPetMenu}>
+            <div className="btn-2" onClick={() => {
+          redirect("/registerpet")}}>
               <FaDog className="icon" />
               <span>Novo Pet</span>
             </div>
-            <div className="btn-2" onClick={favMenu}>
+            <div className="btn-2" onClick={() => {
+          redirect("/favorites")}}>
               <FaHeart className="icon" />
               <span>Favoritos</span>
             </div>
