@@ -22,10 +22,6 @@ export function BottomBar() {
         <FaComment className="icon-menu" />
         <span>Conversas</span>
       </div>
-      <div className="item-menu">
-        <FaDog className="icon-menu" />
-        <span>Novo Pet</span>
-      </div>
     </div>
   );
 }
