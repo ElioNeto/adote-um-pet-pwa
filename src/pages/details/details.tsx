@@ -21,8 +21,6 @@ export function Details() {
 
   let { id } = useParams();
 
-  let classes = "bio";
-
   useEffect(() => {
     fetch(`http://localhost:5000/profiles/${id}`)
       .then((response) => response.json())
