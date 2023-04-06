@@ -9,11 +9,11 @@ export function BottomBar() {
       </div>
       <div className="item-menu">
         <FaComment className="icon-menu" />
-        <span>Inicio</span>
+        <span>Conversas</span>
       </div>
       <div className="item-menu">
         <FaDog className="icon-menu" />
-        <span>Inicio</span>
+        <span>Novo Pet</span>
       </div>
     </div>
   );
