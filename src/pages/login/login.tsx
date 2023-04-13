@@ -1,6 +1,7 @@
 import { FaGoogle, FaFacebook, FaApple } from "react-icons/fa";
 import "./login.css";
 import Logo from "../../assets/AdoteUmPet.svg";
+import { redirect } from "../../utils/utils";
 
 export function Login() {
   const homeLogin = () => {
@@ -17,7 +18,7 @@ export function Login() {
         <div className="forgot-container">
           <a href="/home">esqueceu sua senha?</a>
         </div>
-        <button onClick={homeLogin}>Acessar</button>
+        <button onClick={() => redirect("/home")}>Acessar</button>
       </div>
       <div className="alternative">
         <div className="divider"></div>
@@ -36,7 +37,7 @@ export function Login() {
         </div>
       </div>
       <div className="form">
-        <button className="signup">cadastre-se</button>
+        <button className="signup" onClick={() => redirect("/signup")}>cadastre-se</button>
       </div>
     </div>
   );

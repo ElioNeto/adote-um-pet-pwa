@@ -10,6 +10,7 @@ import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import Stack from "@mui/material/Stack";
 import { useState } from "react";
+import { redirect } from "../../utils/utils";
 
 export function Signup() {
   const [formData, setFormData] = useState({
@@ -22,9 +23,7 @@ export function Signup() {
     genre: "",
     photo: "",
   });
-  const homeLogin = () => {
-    window.location.href = "/home";
-  };
+  
   function handleSubmit(e: any) {
     e.preventDefault();
     fetch("http://localhost:3000/user", {
@@ -95,7 +94,7 @@ export function Signup() {
           </RadioGroup>
         </FormControl>
         <input type="file" placeholder="Foto de Perfil" name="profilePic" />
-        <button onClick={homeLogin}>Cadastrar</button>
+        <button onClick={() => {redirect("/home")}}>Cadastrar</button>
       </form>
     </div>
   );

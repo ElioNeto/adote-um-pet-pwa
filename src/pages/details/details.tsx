@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { InfoCard } from "../../components/info-card/info-card";
 import { Header } from "../../components/header/header";
+import { redirect } from "../../utils/utils";
 
 export function Details() {
   const [name, setName] = useState();
@@ -111,7 +112,7 @@ export function Details() {
           {bio}
         </div>
         {!isHuman && (
-          <button className="profile-button">Tenho interesse</button>
+          <button className="profile-button" onClick={() => {redirect("/chats")}}>Tenho interesse</button>
         )}
       </div>
     </div>
