@@ -2,11 +2,10 @@ import { FaGoogle, FaFacebook, FaApple } from "react-icons/fa";
 import "./login.css";
 import Logo from "../../assets/AdoteUmPet.svg";
 
-const homeLogin = () => {
-  window.location.href = "/home";
-};
-
 export function Login() {
+  const homeLogin = () => {
+    window.location.href = "/home";
+  };
   return (
     <div className="container">
       <div className="logo">
