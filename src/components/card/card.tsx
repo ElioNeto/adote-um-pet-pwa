@@ -1,4 +1,4 @@
-import { FaVenus } from "react-icons/fa";
+import { FaHeart, FaVenus } from "react-icons/fa";
 import "./card.css";
 
 import Switch from "@mui/material/Switch";
@@ -18,9 +18,20 @@ const PinkSwitch = styled(Switch)(({ theme }) => ({
 }));
 
 const label = { inputProps: { "aria-label": "Color switch demo" } };
-export function Card(props: { showActions: boolean }) {
+export function Card(props: { showActions?: boolean; showHeart?: boolean }) {
   return (
     <div className="card">
+      {props.showHeart && (
+        <div className="card-header">
+          <div className="btn-heart">
+            <FaHeart
+              className="card-heart-icon"
+              onClick={() => console.log("like")}
+            />
+          </div>
+        </div>
+      )}
+
       <div className="photo">
         <img
           src="https://blog-static.petlove.com.br/wp-content/uploads/2020/11/gato-rosna.jpg"

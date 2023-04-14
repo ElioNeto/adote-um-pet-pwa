@@ -6,10 +6,40 @@
   align-items: center;
   justify-content: center;
 }
- 
+
 img {
   width: 292px;
   height: 276px;
+}
+
+.genre-container {
+  display: flex;
+  flex-direction: row !important;
+  justify-content: space-between;
+
+  margin-bottom: 16px;
+}
+
+.Mui-focused,
+.MuiFormLabel-root,
+.see-more {
+  color: #fff !important;
+}
+
+.see-more {
+  font-family: "Outfit";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16pt;
+  line-height: 20px;
+  width: 100%;
+  text-align: end;
+}
+
+.filter-weight {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: hidden;
 }
 
 .form {
@@ -18,6 +48,7 @@ img {
 }
 
 input {
+  width: 100%;
   margin-bottom: 1rem;
   height: 60px;
   border: 1px solid #887e7e;
@@ -39,92 +70,34 @@ input::placeholder {
   color: #eeeeee;
 }
 
-button {
-  background: #ff5757;
-  border-radius: 5px;
-  height: 60px;
-
-  font-family: "Outfit";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 30px;
-
-  color: #ffffff;
+.hide {
+  display: none;
 }
 
-button.signup {
-  background: #887e7e;
-  margin-top: 36px;
-}
+.filter-fake-button {
+  padding: 12px;
+  border: 1px solid #cecece;
+  width: 100%;
+  text-align: center;
+  border-radius: 8px;
+  background-color: #cececa;
+  font-family: "Poppins";
+  font-weight: 600;
 
-.forgot-container {
-  display: flex;
-  justify-content: end;
-}
-
-a {
-  text-decoration: none;
-  font-family: "Outfit";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 20px;
-
-  color: rgba(255, 255, 255, 0.5);
   margin-bottom: 16px;
+  transition: 0.5s all;
 }
 
-.alternative {
-  margin-top: 16px;
+.filter-fake-button:hover {
+  color: #887e7e;
+}
+
+.search-container {
   display: flex;
-  align-items: center;
-  flex-wrap: nowrap;
-  justify-content: space-between;
 }
 
-.rotate180deg {
-  transform: rotate(180deg);
-}
-
-.divider {
-  width: calc(50vw - 90px);
-  height: 3px;
-  margin: 5px;
-  margin-left: 10px;
-  margin-right: 10px;
-  background: linear-gradient(
-    269.97deg,
-    #ff5757 4.18%,
-    rgba(196, 196, 196, 0) 77.28%
-  );
-}
-
-span {
-  font-family: "Outfit";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 15px;
-
-  color: #ffffff;
-}
-
-.socials {
+.see-more-card-container {
+  display: flex;
+  overflow-x: scroll;
   margin-top: 24px;
-  display: flex;
-  justify-content: space-around;
-}
-
-.google {
-  color: #eee;
-  font-size: 40px;
-}
-.facebook {
-  color: #eee;
-  font-size: 50px;
-}
-.apple {
-  color: #eee;
-  font-size: 50px;
 }

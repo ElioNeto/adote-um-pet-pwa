@@ -13,8 +13,8 @@ export function Favorites() {
         <div className="carousel-fav">
           <h2 className="fav-h2">Favoritos</h2>
           <div className="cards-fav">
-            <Card showActions={false} />
-            <Card showActions={false} />
+            <Card />
+            <Card />
           </div>
         </div>
       </div>
