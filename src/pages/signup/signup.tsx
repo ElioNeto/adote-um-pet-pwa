@@ -11,6 +11,7 @@ import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import Stack from "@mui/material/Stack";
 import { useState } from "react";
 import { redirect } from "../../utils/utils";
+import { createUser } from "../../utils/firebase";
 
 export function Signup() {
   const [formData, setFormData] = useState({
@@ -21,11 +22,20 @@ export function Signup() {
     birth: "",
     password: "",
     genre: "",
-    photo: "",
+    photo:"",
   });
-  
+  async function create(e:any){
+    e.preventDefault();
+    console.log(formData);
+    
+await createUser(formData.email, formData.password, formData)
+     
+    
+  }
   function handleSubmit(e: any) {
     e.preventDefault();
+    console.log(formData);
+    
     fetch("http://localhost:3000/user", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -36,48 +46,58 @@ export function Signup() {
   }
 
   function handleChange(e: any) {
+    e.preventDefault();
     setFormData({ ...formData, [e.target.name]: e.target.value });
   }
+
+  //TODO: https://codesandbox.io/s/convert-file-to-base64-in-react-lqi1e
+
   return (
     <div className="container">
       <div className="logo">
         <img src={Logo} alt="logo" />
       </div>
-      <form className="form" onSubmit={(e) => handleSubmit(e)}>
+      <form className="form" onSubmit={(e) => create(e)}>
         <input
           type="text"
           placeholder="Nome"
           value={formData.name}
+          name="name"
           onChange={(e) => handleChange(e)}
         />
         <input
           type="text"
           placeholder="Email"
           value={formData.email}
+          name="email"
           onChange={(e) => handleChange(e)}
         />
         <input
           type="text"
           placeholder="Telefone"
           value={formData.tel}
+          name="tel"
           onChange={(e) => handleChange(e)}
         />
         <input
           type="text"
           placeholder="CPF"
           value={formData.cpf}
+          name="cpf"
           onChange={(e) => handleChange(e)}
         />
         <input
           type="text"
           placeholder="Data de Nascimento"
           value={formData.birth}
+          name="birth"
           onChange={(e) => handleChange(e)}
         />
         <input
           type="password"
           placeholder="Senha"
           value={formData.password}
+          name="password"
           onChange={(e) => handleChange(e)}
         />
         <FormControl>
@@ -85,16 +105,17 @@ export function Signup() {
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
             defaultValue="female"
-            name="radio-buttons-group"
+            name="genre"
             className="radio-button"
+            onChange={(e) => handleChange(e)}
           >
-            <FormControlLabel value="female" control={<Radio />} label="F" />
-            <FormControlLabel value="male" control={<Radio />} label="M" />
-            <FormControlLabel value="other" control={<Radio />} label="Outro" />
+            <FormControlLabel value="female" control={<Radio />} label="F" onChange={(e) => handleChange(e)}/>
+            <FormControlLabel value="male" control={<Radio />} label="M" onChange={(e) => handleChange(e)}/>
+            <FormControlLabel value="other" control={<Radio />} label="Outro" onChange={(e) => handleChange(e)} />
           </RadioGroup>
         </FormControl>
-        <input type="file" placeholder="Foto de Perfil" name="profilePic" />
-        <button onClick={() => {redirect("/home")}}>Cadastrar</button>
+        <input type="text" placeholder="Foto de Perfil" name="photo" onChange={(e)=>handleChange(e)}/>
+        <button type="submit">Cadastrar</button>
       </form>
     </div>
   );

@@ -6,6 +6,8 @@ import { InfoCard } from "../../components/info-card/info-card";
 import { Header } from "../../components/header/header";
 import { redirect } from "../../utils/utils";
 
+import {writeData} from '../../utils/firebase'
+
 export function Details() {
   const [name, setName] = useState();
   const [image, setImage] = useState();
@@ -21,7 +23,7 @@ export function Details() {
   const [bio, setBio] = useState();
 
   let { id } = useParams();
-
+  let id2 = 1
   useEffect(() => {
     fetch(`http://localhost:5000/profiles/${id}`)
       .then((response) => response.json())
@@ -47,6 +49,12 @@ export function Details() {
         console.log(err.message);
       });
   }, []);
+
+  function post() {
+   
+     writeData(`maaquinho_rosa/${id2}`, {test:"teste"})
+     id2 = id2 + 1
+  }
 
   function getOwnerInformations(id: number) {
     fetch(`http://localhost:5000/profiles/${id}`)
@@ -112,7 +120,15 @@ export function Details() {
           {bio}
         </div>
         {!isHuman && (
-          <button className="profile-button" onClick={() => {redirect("/chats")}}>Tenho interesse</button>
+          <button
+            className="profile-button"
+            onClick={() => {
+              //redirect("/chats");
+              post()
+            }}
+          >
+            Tenho interesse
+          </button>
         )}
       </div>
     </div>
