@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getDatabase, push, ref, set, onValue, orderByChild, query } from "firebase/database";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getDatabase, push, ref, set, onValue } from "firebase/database";
+import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword  } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCa9RM357zXhkbSiSKCC7xYUi9FqR_UIx8",
@@ -39,21 +39,34 @@ export function readSubsData(collection:string):any{
 export async function createUser (email:string, password:string, data?:any):Promise<any>{
   await createUserWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
-    // Signed in 
-    //const user = userCredential.user;
+   let sanitizedEmail = email.replace(/[.@_-]/g, "");
     console.log(data, "firebase");
-    
-    writeAddData('users_bkp', data)
+    writeData(`users/${sanitizedEmail}`, data)
     return "success"
     // ...
   })
   .catch((error) => {
-    
-    
-    const errorCode = error.code;
+   // const errorCode = error.code;
     const errorMessage = error.message;
     console.log(errorMessage);
     return errorMessage
   })
   //return "Não foi possivel comunicar com o servidor"
+}
+
+export function login(email:string, password:string):any{
+  signInWithEmailAndPassword(auth, email, password)
+  .then(userCredential => {
+    
+    userCredential.user.getIdTokenResult().then((res)=>{
+      let token = res.token
+      sessionStorage.setItem("token", token);
+    })
+    return "sucesso"
+  }).catch((error) => {
+    //const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log(errorMessage);
+    return errorMessage
+  })
 }

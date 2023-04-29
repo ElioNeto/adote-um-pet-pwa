@@ -1,9 +1,9 @@
 import { FaGoogle, FaFacebook, FaApple } from "react-icons/fa";
 import "./login.css";
 import Logo from "../../assets/AdoteUmPet.svg";
-import { redirect } from "../../utils/utils";
+import { getAuthToken, redirect } from "../../utils/utils";
 import { useEffect, useState } from "react";
-import { createUser, readSubsData } from "../../utils/firebase";
+import { login } from "../../utils/firebase";
 
 export function Login() {
 
@@ -11,24 +11,26 @@ export function Login() {
   const [password, setPassword] = useState('')
   const [msg, setMsg] = useState('')
 
-async function teste(){
-  let a = await readSubsData('/users_bkp')
-  console.log(a);
+function handlerLogin(e:any){
+  e.preventDefault()
+  login(email, password)
+  setTimeout(() => {
+    let token = getAuthToken()
+    if(token) redirect("/home")
+    else console.log("Ocoreu um erro");
+    
+  }, 1000);
+  //console.log(getAuthToken())
 }
 
-  const homeLogin = () => {
-    window.location.href = "/home";
-  };
-
-  
   return (
     <div className="container">
       <div className="logo">
         <img src={Logo} alt="logo" />
       </div>
-      <div className="form">
-        <input type="text" placeholder="email"  onChange={event => setEmail(event.target.value)}/>
-        <input type="password" placeholder="senha" onChange={event => setPassword(event.target.value)}/>
+      <form className="form" onSubmit={(e)=>handlerLogin(e)}>
+        <input type="text" placeholder="email"  onChange={event => setEmail(event.target.value)} required/>
+        <input type="password" placeholder="senha" onChange={event => setPassword(event.target.value)} required/>
 
         {msg !== ''&& <span>{msg}</span>}
         
@@ -36,8 +38,8 @@ async function teste(){
         <div className="forgot-container">
           <a href="/home">esqueceu sua senha?</a>
         </div>
-        <button onClick={teste}>Acessar</button>
-      </div>
+        <button type="submit">Acessar</button>
+      </form>
       <div className="alternative">
         <div className="divider"></div>
         <span>ou acesse com</span>

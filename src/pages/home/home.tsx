@@ -3,9 +3,15 @@ import Logo from "../../assets/AdoteUmPet.svg";
 import "./home.css";
 import { Card } from "../../components/card/card";
 import { BottomBar } from "../../components/bottom-bar/bottom-bar";
-import { redirect } from "../../utils/utils";
+import { authValidate, redirect } from "../../utils/utils";
+import { useEffect } from "react";
 
 export function Home() {
+
+  useEffect(() => {
+    if(!authValidate()) redirect("/")
+  })
+
   return (
     <>
       <div className="logo">
