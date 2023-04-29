@@ -14,6 +14,7 @@ import { redirect } from "../../utils/utils";
 import { createUser } from "../../utils/firebase";
 
 export function Signup() {
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -28,21 +29,9 @@ export function Signup() {
     e.preventDefault();
     console.log(formData);
     
-await createUser(formData.email, formData.password, formData)
+  await createUser(formData.email, formData.password, formData)
      
     
-  }
-  function handleSubmit(e: any) {
-    e.preventDefault();
-    console.log(formData);
-    
-    fetch("http://localhost:3000/user", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data.user));
   }
 
   function handleChange(e: any) {
@@ -64,6 +53,7 @@ await createUser(formData.email, formData.password, formData)
           value={formData.name}
           name="name"
           onChange={(e) => handleChange(e)}
+          required
         />
         <input
           type="text"
@@ -71,6 +61,7 @@ await createUser(formData.email, formData.password, formData)
           value={formData.email}
           name="email"
           onChange={(e) => handleChange(e)}
+          required
         />
         <input
           type="text"
@@ -78,6 +69,7 @@ await createUser(formData.email, formData.password, formData)
           value={formData.tel}
           name="tel"
           onChange={(e) => handleChange(e)}
+          required
         />
         <input
           type="text"
@@ -85,6 +77,7 @@ await createUser(formData.email, formData.password, formData)
           value={formData.cpf}
           name="cpf"
           onChange={(e) => handleChange(e)}
+          required
         />
         <input
           type="text"
@@ -92,6 +85,7 @@ await createUser(formData.email, formData.password, formData)
           value={formData.birth}
           name="birth"
           onChange={(e) => handleChange(e)}
+          required
         />
         <input
           type="password"
@@ -99,6 +93,7 @@ await createUser(formData.email, formData.password, formData)
           value={formData.password}
           name="password"
           onChange={(e) => handleChange(e)}
+          required
         />
         <FormControl>
           <FormLabel id="demo-radio-buttons-group-label">Gênero</FormLabel>
