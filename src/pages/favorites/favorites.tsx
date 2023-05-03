@@ -2,8 +2,15 @@ import Logo from "../../assets/AdoteUmPet.svg";
 import "./favorites.css";
 import { Card } from "../../components/card/card";
 import { BottomBar } from "../../components/bottom-bar/bottom-bar";
+import { authValidate, redirect } from "../../utils/utils";
+import { useEffect } from "react";
 
 export function Favorites() {
+
+  useEffect(() => {
+    if(!authValidate()) redirect("/")
+  })
+
   return (
     <>
       <div className="logo-fav">

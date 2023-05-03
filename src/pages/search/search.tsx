@@ -6,10 +6,16 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import { BottomBar } from "../../components/bottom-bar/bottom-bar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { authValidate, redirect } from "../../utils/utils";
 import { Card } from "../../components/card/card";
 
 export function Search() {
+
+  useEffect(() => {
+    if(!authValidate()) redirect("/")
+  })
+
   const [isHideFilter, setIsHideFilter] = useState(true);
 
   function hideShowFilter() {

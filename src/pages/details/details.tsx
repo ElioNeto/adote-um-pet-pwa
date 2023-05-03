@@ -4,11 +4,12 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { InfoCard } from "../../components/info-card/info-card";
 import { Header } from "../../components/header/header";
-import { redirect } from "../../utils/utils";
+import { authValidate, redirect } from "../../utils/utils";
 
 import {writeData} from '../../utils/firebase'
 
 export function Details() {
+
   const [name, setName] = useState();
   const [image, setImage] = useState();
   const [age, setAge] = useState();

@@ -10,9 +10,14 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import Stack from '@mui/material/Stack';
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { authValidate, redirect } from "../../utils/utils";
 
 export function Registerpet() {
+  
+  useEffect(() => {
+    if(!authValidate()) redirect("/")
+  })
 
   const homeLogin = () => {
     window.location.href = "/home";
