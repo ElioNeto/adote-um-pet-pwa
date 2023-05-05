@@ -14,6 +14,10 @@ import { createUser } from "../../utils/firebase";
 
 export function Signup() {
   
+  const homeLogin = () => {
+    window.location.href = "/home";
+  };
+  
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -27,7 +31,7 @@ export function Signup() {
   async function create(e:any){
     e.preventDefault();
     console.log(formData);
-    
+
     if(handleValidation(e)) {
       await createUser(formData.email, formData.password, formData)
     }
@@ -156,7 +160,7 @@ export function Signup() {
             </RadioGroup>
           </FormControl>
           <input type="text" placeholder="Foto de Perfil" name="photo" onChange={(e)=>handleChange(e)}/>
-          <button type="submit">Cadastrar</button>
+          <button type="submit" onSubmit={homeLogin}>Cadastrar</button>
         </form>
       </div>
   );
