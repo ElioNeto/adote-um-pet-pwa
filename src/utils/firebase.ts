@@ -1,13 +1,19 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getDatabase, push, ref, set, onValue } from "firebase/database";
+import {
+  getDatabase,
+  push,
+  ref,
+  set,
+  onValue,
+  remove,
+} from "firebase/database";
 import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { TOKEN, USER, USER_COLLECTION } from "./constants";
-import { saveOnLocalStorage } from "./utils";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCa9RM357zXhkbSiSKCC7xYUi9FqR_UIx8",
@@ -31,6 +37,10 @@ export function writeData(collection: string, data: any) {
 }
 export function writeAddData(collection: string, data: any) {
   push(ref(db, collection), data);
+}
+
+export function deleteData(collection: string) {
+  remove(ref(db, collection));
 }
 
 export function readSubsData(collection: string, callback: any) {

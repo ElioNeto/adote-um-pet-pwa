@@ -6,15 +6,14 @@ import { InfoCard } from "../../components/info-card/info-card";
 import { Header } from "../../components/header/header";
 import { authValidate, redirect } from "../../utils/utils";
 
-import {writeData} from '../../utils/firebase'
+import { readSubsData, writeData } from "../../utils/firebase";
+import { PETS_COLLECTION, USER_COLLECTION } from "../../utils/constants";
 
 export function Details() {
-
   const [name, setName] = useState();
   const [image, setImage] = useState();
   const [age, setAge] = useState();
   const [location, setLocation] = useState();
-  const [isHuman, setIsHuman] = useState();
   const [ownerName, setOwnerName] = useState();
   const [ownerImage, setOwnerImage] = useState();
   const [genre, setGenre] = useState("");
@@ -22,61 +21,43 @@ export function Details() {
   const [race, setRace] = useState();
   const [weight, setWeight] = useState();
   const [bio, setBio] = useState();
+  const [owner, setOwner] = useState();
 
   let { id } = useParams();
-  let id2 = 1
+
   useEffect(() => {
-    fetch(`http://localhost:5000/profiles/${id}`)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        setName(data.name);
-        setAge(data.age);
-        setLocation(data.location);
-        setIsHuman(data.isHuman);
-        setImage(data.photo_url);
-        setBio(data.bio);
-        if (!data.isHuman) {
-          setColor(data.animal_data.color);
-          sanitizeGenre(data.animal_data.genre);
-          setRace(data.animal_data.race);
-          setWeight(data.animal_data.weight);
-          getOwnerInformations(data.animal_data.owner_id);
-        } else {
-          document.getElementById("bio")!.classList.add("human-bio");
-        }
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
+    getGeneralData();
   }, []);
 
-  function post() {
-   
-     writeData(`maaquinho_rosa/${id2}`, {test:"teste"})
-     id2 = id2 + 1
+  function getOwnerInformations(id: string) {
+    readSubsData(`${USER_COLLECTION}/${id}`, (cb: any) => {
+      setOwnerImage(cb.photo);
+      setOwnerName(cb.name);
+    });
   }
 
-  function getOwnerInformations(id: number) {
-    fetch(`http://localhost:5000/profiles/${id}`)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-
-        setOwnerImage(data.photo_url);
-        setOwnerName(data.name);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
+  function getGeneralData() {
+    readSubsData(`${PETS_COLLECTION}/${id}`, (cb: any) => {
+      setName(cb.petName);
+      setAge(cb.petAge);
+      setLocation(cb.petLocation);
+      setImage(cb.petPic);
+      setBio(cb.petInfo);
+      setColor(cb.petColor);
+      sanitizeGenre(cb.petSexOptions);
+      setRace(cb.petRace);
+      setWeight(cb.petWeight);
+      getOwnerInformations(cb.petOwner);
+      setOwner(cb.petOwner);
+    });
   }
 
   function sanitizeGenre(value: string) {
     switch (value.toLowerCase()) {
-      case "f":
+      case "female":
         setGenre("Fêmea");
         break;
-      case "m":
+      case "male":
         setGenre("Macho");
         break;
       default:
@@ -86,7 +67,7 @@ export function Details() {
 
   return (
     <div className="detail-container">
-      <Header id={id} location="/home" showLike={!isHuman} />
+      <Header location="/home" showLike={true} user={owner} pet={id} />
       <div className="image">
         <img src={image} alt="gato ioda" />
       </div>
@@ -99,38 +80,33 @@ export function Details() {
           <FaMapMarkerAlt className="location-icon" />
           <span className="location">{location}</span>
         </div>
-        {!isHuman && (
-          <>
-            <div className="details">
-              <InfoCard title="Sexo" value={genre} />
-              <InfoCard title="Cor" value={color} />
-              <InfoCard title="Raça" value={race} />
-              <InfoCard title="Peso" value={`${weight}Kg`} />
+        <>
+          <div className="details">
+            <InfoCard title="Sexo" value={genre} />
+            <InfoCard title="Cor" value={color} />
+            <InfoCard title="Raça" value={race} />
+            <InfoCard title="Peso" value={`${weight}Kg`} />
+          </div>
+          <div className="profile">
+            <img src={ownerImage} alt="#" />
+            <div className="data-profile">
+              <span className="title">Dono(a):</span>
+              <span className="value">{ownerName}</span>
             </div>
-            <div className="profile">
-              <img src={ownerImage} alt="#" />
-              <div className="data-profile">
-                <span className="title">Dono(a):</span>
-                <span className="value">{ownerName}</span>
-              </div>
-            </div>
-          </>
-        )}
+          </div>
+        </>
 
         <div className="bio" id="bio">
           {bio}
         </div>
-        {!isHuman && (
-          <button
-            className="profile-button"
-            onClick={() => {
-              //redirect("/chats");
-              post()
-            }}
-          >
-            Tenho interesse
-          </button>
-        )}
+        <button
+          className="profile-button"
+          onClick={() => {
+            //redirect("/chats");
+          }}
+        >
+          Tenho interesse
+        </button>
       </div>
     </div>
   );

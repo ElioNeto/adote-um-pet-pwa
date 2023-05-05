@@ -5,7 +5,7 @@ import { Card } from "../../components/card/card";
 import { BottomBar } from "../../components/bottom-bar/bottom-bar";
 import { authValidate, getSessionItem, redirect } from "../../utils/utils";
 import { useEffect, useState } from "react";
-import { readSubsData } from "../../utils/firebase";
+import { deleteData, readSubsData } from "../../utils/firebase";
 import { PETS_COLLECTION, USER } from "../../utils/constants";
 
 export function Home() {

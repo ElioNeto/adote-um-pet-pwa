@@ -24,7 +24,10 @@ export function Card(props: {
   data: any;
 }) {
   return (
-    <div className="card">
+    <div
+      className="card"
+      onClick={() => (window.location.href = `detail/${props.data.id}`)}
+    >
       {props.showHeart && (
         <div className="card-header">
           <div className="btn-heart">
