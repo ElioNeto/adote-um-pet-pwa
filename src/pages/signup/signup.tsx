@@ -11,13 +11,18 @@ import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import Stack from "@mui/material/Stack";
 import { useState } from "react";
 import { createUser } from "../../utils/firebase";
+import { login } from "../../utils/firebase";
 
 export function Signup() {
   
+
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
   const homeLogin = () => {
     window.location.href = "/home";
   };
-  
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -33,7 +38,11 @@ export function Signup() {
     console.log(formData);
 
     if(handleValidation(e)) {
-      await createUser(formData.email, formData.password, formData)
+      var rtn = await createUser(formData.email, formData.password, formData)
+      login(email, password)
+      if(rtn = "success") {
+        homeLogin()
+      }
     }
     
   }
@@ -84,8 +93,6 @@ export function Signup() {
     return true;
   
   }
-
-  //TODO: https://codesandbox.io/s/convert-file-to-base64-in-react-lqi1e
 
   return (
    
@@ -160,7 +167,7 @@ export function Signup() {
             </RadioGroup>
           </FormControl>
           <input type="text" placeholder="Foto de Perfil" name="photo" onChange={(e)=>handleChange(e)}/>
-          <button type="submit" onSubmit={homeLogin}>Cadastrar</button>
+          <button type="submit">Cadastrar</button>
         </form>
       </div>
   );
