@@ -5,12 +5,19 @@ import { Card } from "../../components/card/card";
 import { BottomBar } from "../../components/bottom-bar/bottom-bar";
 import { authValidate, redirect } from "../../utils/utils";
 import { useEffect } from "react";
+import { readSubsData } from "../../utils/firebase";
+import { PETS_COLLECTION } from "../../utils/constants";
 
 export function Home() {
+  useEffect(() => {
+    if (!authValidate()) redirect("/");
+  });
 
   useEffect(() => {
-    if(!authValidate()) redirect("/")
-  })
+    readSubsData(PETS_COLLECTION, (cb: any) => {
+      console.log(cb);
+    });
+  });
 
   return (
     <>
@@ -20,20 +27,32 @@ export function Home() {
       <div className="container">
         <div className="buttons">
           <div className="first-layer">
-            <div className="btn-1" onClick={() => {
-          redirect("/search")}}>
+            <div
+              className="btn-1"
+              onClick={() => {
+                redirect("/search");
+              }}
+            >
               <FaSearch className="icon" />
               <span>Pesquisar</span>
             </div>
           </div>
           <div className="second-layer">
-            <div className="btn-2" onClick={() => {
-          redirect("/registerpet")}}>
+            <div
+              className="btn-2"
+              onClick={() => {
+                redirect("/registerpet");
+              }}
+            >
               <FaDog className="icon" />
               <span>Novo Pet</span>
             </div>
-            <div className="btn-2" onClick={() => {
-          redirect("/favorites")}}>
+            <div
+              className="btn-2"
+              onClick={() => {
+                redirect("/favorites");
+              }}
+            >
               <FaHeart className="icon" />
               <span>Favoritos</span>
             </div>

@@ -28,11 +28,11 @@ export function writeAddData(collection: string, data: any) {
   push(ref(db, collection), data);
 }
 
-export function readSubsData(collection:string):any{
+export function readSubsData(collection:string, callback:any){
   const starCountRef = ref(db, collection);
   onValue(starCountRef, (snapshot) => {
   let data = snapshot.val();
-  return data
+  callback(data)
 });
 
 }
@@ -41,7 +41,6 @@ export async function createUser (email:string, password:string, data?:any):Prom
   await createUserWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
    let sanitizedEmail = email.replace(/[.@_-]/g, "");
-    console.log(data, "firebase");
     writeData(`users/${sanitizedEmail}`, data)
     return "success"
     // ...
