@@ -14,6 +14,7 @@ import { useState, useEffect } from "react";
 import { authValidate, redirect } from "../../utils/utils";
 import { writeData } from "../../utils/firebase";
 import { PETS_COLLECTION } from "../../utils/constants";
+import {base64Resize} from '../../utils/resize'
 
 export function Registerpet() {
   
@@ -50,8 +51,17 @@ export function Registerpet() {
       let reader = new FileReader();
       reader.readAsDataURL(files[0]);
       reader.onload = (e) => {
-        console.log('image data: ', e.target!.result);
-        setFormData({ ...formData, [evt.target.name]: e.target!.result });
+        //console.log('image data: ', e.target!.result);
+       base64Resize(e.target!.result, 0.4, (cb:any) => {
+        //console.log(cb, "resized");
+
+        setFormData({ ...formData, [evt.target.name]: cb });
+    
+
+      })
+          
+      
+        
       };
       
       // setSelectedFile(e.target.value);
@@ -60,7 +70,12 @@ export function Registerpet() {
   
 
   function persistData() {
-    writeData(PETS_COLLECTION, formData)
+    writeData(`${PETS_COLLECTION}/${formData.petOptions}${formData.petName}${formData.petRace}${formData.petAge}`, formData)
+    setTimeout(() => {
+      homeLogin() 
+    }, 1500);
+    
+   
   }
   
   function handleValidation(e:any) {
@@ -86,8 +101,6 @@ export function Registerpet() {
       //homeLogin();
       persistData()
      
-      
-      //convertBase64(formData.petPic)
     }
   
   }
@@ -103,9 +116,9 @@ export function Registerpet() {
                       defaultValue="dog"
                       name="petOptions"
                       onChange={(e) => handleChange(e)}>
-              <FormControlLabel value="dog" control={<Radio />} label="Cachorro" />
-              <FormControlLabel value="cat" control={<Radio />} label="Gato" />
-              <FormControlLabel value="othersPets" control={<Radio />} label="Outros pets" />
+              <FormControlLabel value="dog" control={<Radio />} label="Cachorro" onChange={(e) => handleChange(e)}/>
+              <FormControlLabel value="cat" control={<Radio />} label="Gato" onChange={(e) => handleChange(e)}/>
+              <FormControlLabel value="othersPets" control={<Radio />} label="Outros pets" onChange={(e) => handleChange(e)}/>
           </RadioGroup>
         </FormControl>
           <input type="text" placeholder="Nome" name="petName" onChange={(e) => handleChange(e)} required/>
@@ -122,8 +135,8 @@ export function Registerpet() {
                       defaultValue="female"
                       name="petSexOptions"
                       onChange={(e) => handleChange(e)}>
-              <FormControlLabel value="female" control={<Radio />} label="F" />
-              <FormControlLabel value="male" control={<Radio />} label="M" />
+              <FormControlLabel value="female" control={<Radio />} label="F" onChange={(e) => handleChange(e)}/>
+              <FormControlLabel value="male" control={<Radio />} label="M" onChange={(e) => handleChange(e)}/>
           </RadioGroup>
         </FormControl>
         <input type="file" placeholder="Foto do Pet" name="petPic" onChange={(e) => handleFileChange(e)}/>

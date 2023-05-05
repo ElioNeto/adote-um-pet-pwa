@@ -12,6 +12,7 @@ import Stack from "@mui/material/Stack";
 import { useState } from "react";
 import { redirect } from "../../utils/utils";
 import { createUser } from "../../utils/firebase";
+import { base64Resize } from "../../utils/resize";
 
 export function Signup() {
 
@@ -38,6 +39,29 @@ export function Signup() {
     e.preventDefault();
     setFormData({ ...formData, [e.target.name]: e.target.value });
   }
+
+  function handleFileChange(evt:any){
+    evt.preventDefault();
+      let files = evt.target.files;
+      let reader = new FileReader();
+      reader.readAsDataURL(files[0]);
+      reader.onload = (e) => {
+        //console.log('image data: ', e.target!.result);
+       base64Resize(e.target!.result, 0.4, (cb:any) => {
+        //console.log(cb, "resized");
+
+        setFormData({ ...formData, [evt.target.name]: cb });
+    
+
+      })
+          
+      
+        
+      };
+      
+      // setSelectedFile(e.target.value);
+      console.log(formData);
+    }
 
   //TODO: https://codesandbox.io/s/convert-file-to-base64-in-react-lqi1e
 
@@ -109,7 +133,7 @@ export function Signup() {
             <FormControlLabel value="other" control={<Radio />} label="Outro" onChange={(e) => handleChange(e)} />
           </RadioGroup>
         </FormControl>
-        <input type="text" placeholder="Foto de Perfil" name="photo" onChange={(e)=>handleChange(e)}/>
+        <input type="file" placeholder="Foto de Perfil" name="photo" onChange={(e)=>handleFileChange(e)}/>
         <button type="submit">Cadastrar</button>
       </form>
     </div>
