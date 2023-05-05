@@ -12,6 +12,8 @@ import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import Stack from '@mui/material/Stack';
 import { useState, useEffect } from "react";
 import { authValidate, redirect } from "../../utils/utils";
+import { writeData } from "../../utils/firebase";
+import { PETS_COLLECTION } from "../../utils/constants";
 
 export function Registerpet() {
   
@@ -33,6 +35,7 @@ export function Registerpet() {
     petInfo: "",
     petOptions: "",
     petSexOptions: "",
+    petPic:null
   });
   
   const[erros, setErrors] = useState('');
@@ -40,6 +43,24 @@ export function Registerpet() {
   function handleChange(e: any) {
     e.preventDefault();
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  }
+  function handleFileChange(evt:any){
+    evt.preventDefault();
+      let files = evt.target.files;
+      let reader = new FileReader();
+      reader.readAsDataURL(files[0]);
+      reader.onload = (e) => {
+        console.log('image data: ', e.target!.result);
+        setFormData({ ...formData, [evt.target.name]: e.target!.result });
+      };
+      
+      // setSelectedFile(e.target.value);
+      console.log(formData);
+    }
+  
+
+  function persistData() {
+    writeData(PETS_COLLECTION, formData)
   }
   
   function handleValidation(e:any) {
@@ -62,7 +83,11 @@ export function Registerpet() {
     }
 
     if(formIsValid) {
-      homeLogin();
+      //homeLogin();
+      persistData()
+     
+      
+      //convertBase64(formData.petPic)
     }
   
   }
@@ -101,7 +126,7 @@ export function Registerpet() {
               <FormControlLabel value="male" control={<Radio />} label="M" />
           </RadioGroup>
         </FormControl>
-        <input type="file" placeholder="Foto do Pet" name="petPic"/>
+        <input type="file" placeholder="Foto do Pet" name="petPic" onChange={(e) => handleFileChange(e)}/>
         <span>{erros}</span>
         <button >Cadastrar o PET</button>
       </form>

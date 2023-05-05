@@ -2,6 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase, push, ref, set, onValue } from "firebase/database";
 import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword  } from "firebase/auth";
+import { TOKEN } from "./constants";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCa9RM357zXhkbSiSKCC7xYUi9FqR_UIx8",
@@ -60,7 +61,7 @@ export function login(email:string, password:string):any{
     
     userCredential.user.getIdTokenResult().then((res)=>{
       let token = res.token
-      sessionStorage.setItem("token", token);
+      sessionStorage.setItem(TOKEN, token);
     })
     return "sucesso"
   }).catch((error) => {
