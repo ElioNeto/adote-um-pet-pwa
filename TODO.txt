@@ -1,0 +1,21 @@
+Fazer função logoff
+    - remover token do sessionStorage
+Ler data do banco de dados
+
+Card precisa mandar para a pagia de detalhes correspondente
+
+# ver funcionalidade "adotado"
+# Nos cards, colocar icone macho e femea
+# Criar funcionalidade like
+
+# home
+    Popular cards
+
+# Search
+    Criar a função para busca
+
+# favoritos
+    Listar
+
+# details
+    Ler infos do banco e popular a tela
