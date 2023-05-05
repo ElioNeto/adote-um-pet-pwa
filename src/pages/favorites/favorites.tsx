@@ -6,10 +6,9 @@ import { authValidate, redirect } from "../../utils/utils";
 import { useEffect } from "react";
 
 export function Favorites() {
-
   useEffect(() => {
-    if(!authValidate()) redirect("/")
-  })
+    if (!authValidate()) redirect("/");
+  });
 
   return (
     <>
@@ -20,8 +19,8 @@ export function Favorites() {
         <div className="carousel-fav">
           <h2 className="fav-h2">Favoritos</h2>
           <div className="cards-fav">
-            <Card />
-            <Card />
+            {/*  <Card />
+            <Card /> */}
           </div>
         </div>
       </div>

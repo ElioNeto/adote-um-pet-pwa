@@ -11,10 +11,9 @@ import { authValidate, redirect } from "../../utils/utils";
 import { Card } from "../../components/card/card";
 
 export function Search() {
-
   useEffect(() => {
-    if(!authValidate()) redirect("/")
-  })
+    if (!authValidate()) redirect("/");
+  });
 
   const [isHideFilter, setIsHideFilter] = useState(true);
 
@@ -106,9 +105,9 @@ export function Search() {
           </div>
           <label className="see-more">Veja mais</label>
           <div className="see-more-card-container">
-            <Card showHeart />
+            {/* <Card showHeart />
             <Card showHeart showActions />
-            <Card showHeart />
+            <Card showHeart /> */}
           </div>
         </div>
       </div>
