@@ -10,16 +10,15 @@ import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import Stack from "@mui/material/Stack";
 import { useState } from "react";
-import { redirect } from "../../utils/utils";
 import { createUser } from "../../utils/firebase";
 
 export function Signup() {
-
+  
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     tel: "",
-    cpf: "",
+    CPF: "",
     birth: "",
     password: "",
     genre: "",
@@ -29,90 +28,137 @@ export function Signup() {
     e.preventDefault();
     console.log(formData);
     
-  await createUser(formData.email, formData.password, formData)
-     
+    if(handleValidation(e)) {
+      await createUser(formData.email, formData.password, formData)
+    }
     
   }
 
   function handleChange(e: any) {
     e.preventDefault();
+    
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  }
+
+  const[erros, setErrors] = useState('');
+
+  function handleValidation(e:any) {
+    e.preventDefault();
+    let formIsValid = true;
+    setErrors("");
+  
+    if(typeof formData.CPF !== "undefined") {
+      if(!TestaCPF(formData.CPF)) {
+        formIsValid = false;
+        setErrors("CPF inválido!");
+      }
+    }
+  
+    return formIsValid;
+  }
+ 
+  function TestaCPF(strCPF:any) {
+    var Soma;
+    var Resto;
+    Soma = 0;
+
+    if (strCPF == "00000000000") return false;
+
+    for (var i=1; i<=9; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (11 - i);
+    Resto = (Soma * 10) % 11;
+
+    if ((Resto == 10) || (Resto == 11))  Resto = 0;
+    if (Resto != parseInt(strCPF.substring(9, 10)) ) return false;
+
+    Soma = 0;
+    for (var i = 1; i <= 10; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (12 - i);
+    Resto = (Soma * 10) % 11;
+
+    if ((Resto == 10) || (Resto == 11))  Resto = 0;
+    if (Resto != parseInt(strCPF.substring(10, 11) ) ) return false;
+
+    return true;
+  
   }
 
   //TODO: https://codesandbox.io/s/convert-file-to-base64-in-react-lqi1e
 
   return (
-    <div className="container">
-      <div className="logo">
-        <img src={Logo} alt="logo" />
-      </div>
-      <form className="form" onSubmit={(e) => create(e)}>
-        <input
-          type="text"
-          placeholder="Nome"
-          value={formData.name}
-          name="name"
-          onChange={(e) => handleChange(e)}
-          required
-        />
-        <input
-          type="text"
-          placeholder="Email"
-          value={formData.email}
-          name="email"
-          onChange={(e) => handleChange(e)}
-          required
-        />
-        <input
-          type="text"
-          placeholder="Telefone"
-          value={formData.tel}
-          name="tel"
-          onChange={(e) => handleChange(e)}
-          required
-        />
-        <input
-          type="text"
-          placeholder="CPF"
-          value={formData.cpf}
-          name="cpf"
-          onChange={(e) => handleChange(e)}
-          required
-        />
-        <input
-          type="text"
-          placeholder="Data de Nascimento"
-          value={formData.birth}
-          name="birth"
-          onChange={(e) => handleChange(e)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Senha"
-          value={formData.password}
-          name="password"
-          onChange={(e) => handleChange(e)}
-          required
-        />
-        <FormControl>
-          <FormLabel id="demo-radio-buttons-group-label">Gênero</FormLabel>
-          <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
-            defaultValue="female"
-            name="genre"
-            className="radio-button"
+   
+      <div className="container">
+        <div className="logo">
+          <img src={Logo} alt="logo" />
+        </div>
+        <form className="form" onSubmit={(e) => create(e)}>
+          <input
+            type="text"
+            placeholder="Nome"
+            value={formData.name}
+            name="name"
             onChange={(e) => handleChange(e)}
-          >
-            <FormControlLabel value="female" control={<Radio />} label="F" onChange={(e) => handleChange(e)}/>
-            <FormControlLabel value="male" control={<Radio />} label="M" onChange={(e) => handleChange(e)}/>
-            <FormControlLabel value="other" control={<Radio />} label="Outro" onChange={(e) => handleChange(e)} />
-          </RadioGroup>
-        </FormControl>
-        <input type="text" placeholder="Foto de Perfil" name="photo" onChange={(e)=>handleChange(e)}/>
-        <button type="submit">Cadastrar</button>
-      </form>
-    </div>
+            required
+          />
+          <input
+            type="text"
+            placeholder="Email"
+            value={formData.email}
+            name="email"
+            onChange={(e) => handleChange(e)}
+            required
+          />
+          <input
+            type="text"
+            placeholder="Telefone"
+            value={formData.tel}
+            name="tel"
+            onChange={(e) => handleChange(e)}
+            required
+          />
+          <div>
+            <input
+              type="text"
+              placeholder="CPF"
+              value={formData.CPF}
+              name="CPF"
+              onChange={(e) => handleChange(e)}
+              required
+            />
+          </div>
+          <span>{erros}</span>
+          <input
+            type="text"
+            placeholder="Data de Nascimento"
+            value={formData.birth}
+            name="birth"
+            onChange={(e) => handleChange(e)}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Senha"
+            value={formData.password}
+            name="password"
+            onChange={(e) => handleChange(e)}
+            required
+          />
+          <FormControl>
+            <FormLabel id="demo-radio-buttons-group-label">Gênero</FormLabel>
+            <RadioGroup
+              aria-labelledby="demo-radio-buttons-group-label"
+              defaultValue="female"
+              name="genre"
+              className="radio-button"
+              onChange={(e) => handleChange(e)}
+            >
+              <FormControlLabel value="female" control={<Radio />} label="F" onChange={(e) => handleChange(e)}/>
+              <FormControlLabel value="male" control={<Radio />} label="M" onChange={(e) => handleChange(e)}/>
+              <FormControlLabel value="other" control={<Radio />} label="Outro" onChange={(e) => handleChange(e)} />
+            </RadioGroup>
+          </FormControl>
+          <input type="text" placeholder="Foto de Perfil" name="photo" onChange={(e)=>handleChange(e)}/>
+          <button type="submit">Cadastrar</button>
+        </form>
+      </div>
   );
 }
 
