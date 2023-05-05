@@ -3,21 +3,38 @@ import Logo from "../../assets/AdoteUmPet.svg";
 import "./home.css";
 import { Card } from "../../components/card/card";
 import { BottomBar } from "../../components/bottom-bar/bottom-bar";
-import { authValidate, redirect } from "../../utils/utils";
-import { useEffect } from "react";
+import { authValidate, getSessionItem, redirect } from "../../utils/utils";
+import { useEffect, useState } from "react";
 import { readSubsData } from "../../utils/firebase";
-import { PETS_COLLECTION } from "../../utils/constants";
+import { PETS_COLLECTION, USER } from "../../utils/constants";
 
 export function Home() {
+  const [petData, setPetData] = useState<any[]>([]);
+  let user = "";
+
   useEffect(() => {
     if (!authValidate()) redirect("/");
-  });
+    else user = getSessionItem(USER)!;
+  }, []);
 
   useEffect(() => {
     readSubsData(PETS_COLLECTION, (cb: any) => {
-      console.log(cb);
+      let arr: any[] = [];
+      Object.keys(cb).forEach((key) => {
+        if (cb[key].petOwner === user) {
+          console.log(key); //column01...
+          console.log(cb[key]); //Coluna 01...
+          let obj = {
+            data: cb[key],
+            id: key,
+          };
+          arr.push(obj);
+        }
+      });
+      setPetData(arr);
+      console.log(arr);
     });
-  });
+  }, []);
 
   return (
     <>
@@ -61,8 +78,9 @@ export function Home() {
         <div className="carousel">
           <h2>Meus Pets</h2>
           <div className="cards">
-            <Card showActions />
-            <Card showActions />
+            {petData.map((pet: any) => (
+              <Card showActions data={pet} key={pet.id} />
+            ))}
           </div>
         </div>
       </div>

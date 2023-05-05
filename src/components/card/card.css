@@ -49,13 +49,21 @@
 }
 
 .header > .genre {
-  color: #f399ca;
-  background-color: #ffb6c19f;
   padding: 2px;
   border-radius: 50%;
   font-size: 16pt;
 
   filter: drop-shadow(0px 4px 28px rgba(25, 33, 74, 0.1));
+}
+
+.venus {
+  color: #f399ca;
+  background-color: #ffb6c19f;
+}
+
+.mars {
+  color: #8eb1e5;
+  background-color: #8eb1e588;
 }
 
 .actions {

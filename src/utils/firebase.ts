@@ -1,8 +1,13 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getDatabase, push, ref, set, onValue } from "firebase/database";
-import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword  } from "firebase/auth";
-import { TOKEN } from "./constants";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { TOKEN, USER, USER_COLLECTION } from "./constants";
+import { saveOnLocalStorage } from "./utils";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCa9RM357zXhkbSiSKCC7xYUi9FqR_UIx8",
@@ -28,45 +33,50 @@ export function writeAddData(collection: string, data: any) {
   push(ref(db, collection), data);
 }
 
-export function readSubsData(collection:string, callback:any){
+export function readSubsData(collection: string, callback: any) {
   const starCountRef = ref(db, collection);
   onValue(starCountRef, (snapshot) => {
-  let data = snapshot.val();
-  callback(data)
-});
-
+    let data = snapshot.val();
+    callback(data);
+  });
 }
 
-export async function createUser (email:string, password:string, data?:any):Promise<any>{
+export async function createUser(
+  email: string,
+  password: string,
+  data?: any
+): Promise<any> {
   await createUserWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-   let sanitizedEmail = email.replace(/[.@_-]/g, "");
-    writeData(`users/${sanitizedEmail}`, data)
-    return "success"
-    // ...
-  })
-  .catch((error) => {
-   // const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log(errorMessage);
-    return errorMessage
-  })
+    .then((userCredential) => {
+      let sanitizedEmail = email.replace(/[.@_-]/g, "");
+      writeData(`users/${sanitizedEmail}`, data);
+      return "success";
+      // ...
+    })
+    .catch((error) => {
+      // const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorMessage);
+      return errorMessage;
+    });
   //return "Não foi possivel comunicar com o servidor"
 }
 
-export function login(email:string, password:string):any{
+export function login(email: string, password: string): any {
   signInWithEmailAndPassword(auth, email, password)
-  .then(userCredential => {
-    
-    userCredential.user.getIdTokenResult().then((res)=>{
-      let token = res.token
-      sessionStorage.setItem(TOKEN, token);
+    .then((userCredential) => {
+      userCredential.user.getIdTokenResult().then((res) => {
+        let token = res.token;
+        sessionStorage.setItem(TOKEN, token);
+        let sanitizedEmail = email.replace(/[.@_-]/g, "");
+        sessionStorage.setItem(USER, sanitizedEmail);
+      });
+      return "sucesso";
     })
-    return "sucesso"
-  }).catch((error) => {
-    //const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log(errorMessage);
-    return errorMessage
-  })
+    .catch((error) => {
+      //const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorMessage);
+      return errorMessage;
+    });
 }

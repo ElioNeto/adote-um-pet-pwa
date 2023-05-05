@@ -1,4 +1,4 @@
-import { FaHeart, FaVenus } from "react-icons/fa";
+import { FaHeart, FaMale, FaMars, FaVenus } from "react-icons/fa";
 import "./card.css";
 
 import Switch from "@mui/material/Switch";
@@ -18,7 +18,11 @@ const PinkSwitch = styled(Switch)(({ theme }) => ({
 }));
 
 const label = { inputProps: { "aria-label": "Color switch demo" } };
-export function Card(props: { showActions?: boolean; showHeart?: boolean }) {
+export function Card(props: {
+  showActions?: boolean;
+  showHeart?: boolean;
+  data: any;
+}) {
   return (
     <div className="card">
       {props.showHeart && (
@@ -33,14 +37,15 @@ export function Card(props: { showActions?: boolean; showHeart?: boolean }) {
       )}
 
       <div className="photo">
-        <img
-          src="https://blog-static.petlove.com.br/wp-content/uploads/2020/11/gato-rosna.jpg"
-          alt="Foto Samantha"
-        />
+        <img src={props.data.data.petPic} alt="Foto Samantha" />
       </div>
       <div className="header">
-        <span>Samantha</span>
-        <FaVenus className="genre" />
+        <span>{props.data.data.petName}</span>
+        {props.data.data.petSexOptions === "male" ? (
+          <FaMars className="genre mars" />
+        ) : (
+          <FaVenus className="genre venus" />
+        )}
       </div>
       {props.showActions && (
         <div className="actions">

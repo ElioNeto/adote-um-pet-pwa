@@ -1,39 +1,47 @@
 import { FaGoogle, FaFacebook, FaApple } from "react-icons/fa";
 import "./login.css";
 import Logo from "../../assets/AdoteUmPet.svg";
-import { getAuthToken, redirect } from "../../utils/utils";
+import { getSessionItem, redirect } from "../../utils/utils";
 import { useEffect, useState } from "react";
 import { login } from "../../utils/firebase";
+import { TOKEN } from "../../utils/constants";
 
 export function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [msg, setMsg] = useState("");
 
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [msg, setMsg] = useState('')
-
-function handlerLogin(e:any){
-  e.preventDefault()
-  login(email, password)
-  setTimeout(() => {
-    let token = getAuthToken()
-    if(token) redirect("/home")
-    else console.log("Ocoreu um erro");
-    
-  }, 1000);
-  //console.log(getAuthToken())
-}
+  function handlerLogin(e: any) {
+    e.preventDefault();
+    login(email, password);
+    setTimeout(() => {
+      let token = getSessionItem(TOKEN);
+      if (token) redirect("/home");
+      else console.log("Ocoreu um erro");
+    }, 1000);
+    //console.log(getAuthToken())
+  }
 
   return (
     <div className="container">
       <div className="logo">
         <img src={Logo} alt="logo" />
       </div>
-      <form className="form" onSubmit={(e)=>handlerLogin(e)}>
-        <input type="text" placeholder="email"  onChange={event => setEmail(event.target.value)} required/>
-        <input type="password" placeholder="senha" onChange={event => setPassword(event.target.value)} required/>
+      <form className="form" onSubmit={(e) => handlerLogin(e)}>
+        <input
+          type="text"
+          placeholder="email"
+          onChange={(event) => setEmail(event.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="senha"
+          onChange={(event) => setPassword(event.target.value)}
+          required
+        />
 
-        {msg !== ''&& <span>{msg}</span>}
-        
+        {msg !== "" && <span>{msg}</span>}
 
         <div className="forgot-container">
           <a href="/home">esqueceu sua senha?</a>
@@ -57,7 +65,9 @@ function handlerLogin(e:any){
         </div>
       </div>
       <div className="form">
-        <button className="signup" onClick={() => redirect("/signup")}>cadastre-se</button>
+        <button className="signup" onClick={() => redirect("/signup")}>
+          cadastre-se
+        </button>
       </div>
     </div>
   );

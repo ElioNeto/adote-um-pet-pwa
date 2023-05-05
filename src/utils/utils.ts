@@ -4,17 +4,15 @@ export function redirect(path: string) {
   window.location.href = path;
 }
 
-export function getAuthToken():string|null{
-return sessionStorage.getItem(TOKEN)
+export function getSessionItem(key: string): string | null {
+  return sessionStorage.getItem(key);
 }
 
-export function authValidate():boolean{
-  if(getAuthToken()) return true
-  else return false
+export function authValidate(): boolean {
+  if (getSessionItem(TOKEN)) return true;
+  else return false;
 }
 
-export function saveOnLocalStorage(key:string, value:string){
-  localStorage.setItem(key, value)
+export function saveOnLocalStorage(key: string, value: string) {
+  localStorage.setItem(key, value);
 }
-
-

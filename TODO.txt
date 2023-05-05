@@ -1,15 +1,16 @@
 Fazer função logoff
     - remover token do sessionStorage
-Ler data do banco de dados
+
+Ler data do banco de dados - OK
 
 Card precisa mandar para a pagia de detalhes correspondente
 
 # ver funcionalidade "adotado"
-# Nos cards, colocar icone macho e femea
+# Nos cards, colocar icone macho e femea - OK
 # Criar funcionalidade like
 
 # home
-    Popular cards
+    Popular cards - OK
 
 # Search
     Criar a função para busca
