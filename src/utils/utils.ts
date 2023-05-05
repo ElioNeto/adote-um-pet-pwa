@@ -1,9 +1,11 @@
+import { TOKEN } from "./constants";
+
 export function redirect(path: string) {
   window.location.href = path;
 }
 
 export function getAuthToken():string|null{
-return sessionStorage.getItem("token")
+return sessionStorage.getItem(TOKEN)
 }
 
 export function authValidate():boolean{
@@ -14,3 +16,5 @@ export function authValidate():boolean{
 export function saveOnLocalStorage(key:string, value:string){
   localStorage.setItem(key, value)
 }
+
+
