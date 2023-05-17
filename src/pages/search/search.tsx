@@ -14,6 +14,9 @@ import { readSubsData } from "../../utils/firebase";
 
 export function Search() {
   const [petData, setPetData] = useState<any[]>([]);
+  const [formData, setFormData] = useState({
+    search: "",
+  });
   useEffect(() => {
     if (!authValidate()) redirect("/");
   });
@@ -21,11 +24,11 @@ export function Search() {
   useEffect(() => {
     readSubsData(PETS_COLLECTION, (cb: any) => {
       let arr: any[] = [];
-      let cbJson = JSON.stringify(cb);
+      // let cbJson = JSON.stringify(cb);
 
       //  console.log(cbJson.includes("cat"));
       Object.keys(cb).forEach((key) => {
-        if (JSON.stringify(cb[key]).includes("netoo")) {
+        if (JSON.stringify(cb[key]).includes(formData.search)) {
           console.log(key); //column01...
           console.log(cb[key]); //Coluna 01...
           let obj = {
@@ -38,7 +41,7 @@ export function Search() {
       setPetData(arr);
       console.log(arr);
     });
-  }, []);
+  }, [formData]);
 
   const [isHideFilter, setIsHideFilter] = useState(true);
 
@@ -54,14 +57,26 @@ export function Search() {
     setIsHideFilter(!isHideFilter);
   }
 
+  function handleChange(e: any) {
+    e.preventDefault();
+
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  }
+
   return (
     <>
       <div className="container">
         <div className="logo">
           <img src={Logo} alt="logo" />
         </div>
-        <div className="form">
-          <input type="text" placeholder="Pesquisar..." name="search" />
+        <form className="form">
+          <input
+            type="text"
+            placeholder="Pesquisar..."
+            name="search"
+            value={formData.search}
+            onChange={(e) => handleChange(e)}
+          />
           <label
             className="filter-fake-button"
             onClick={hideShowFilter}
@@ -134,7 +149,7 @@ export function Search() {
             <Card showHeart showActions />
             <Card showHeart /> */}
           </div>
-        </div>
+        </form>
       </div>
       <div className="menu">
         <BottomBar />
