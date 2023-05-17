@@ -9,11 +9,36 @@ import { BottomBar } from "../../components/bottom-bar/bottom-bar";
 import { useState, useEffect } from "react";
 import { authValidate, redirect } from "../../utils/utils";
 import { Card } from "../../components/card/card";
+import { PETS_COLLECTION } from "../../utils/constants";
+import { readSubsData } from "../../utils/firebase";
 
 export function Search() {
+  const [petData, setPetData] = useState<any[]>([]);
   useEffect(() => {
     if (!authValidate()) redirect("/");
   });
+
+  useEffect(() => {
+    readSubsData(PETS_COLLECTION, (cb: any) => {
+      let arr: any[] = [];
+      let cbJson = JSON.stringify(cb);
+
+      //  console.log(cbJson.includes("cat"));
+      Object.keys(cb).forEach((key) => {
+        if (JSON.stringify(cb[key]).includes("netoo")) {
+          console.log(key); //column01...
+          console.log(cb[key]); //Coluna 01...
+          let obj = {
+            data: cb[key],
+            id: key,
+          };
+          arr.push(obj);
+        }
+      });
+      setPetData(arr);
+      console.log(arr);
+    });
+  }, []);
 
   const [isHideFilter, setIsHideFilter] = useState(true);
 

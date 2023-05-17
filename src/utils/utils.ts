@@ -18,6 +18,10 @@ export function saveOnLocalStorage(key: string, value: string) {
   localStorage.setItem(key, value);
 }
 
+export function getFromLocalStorage(key: string) {
+  localStorage.getItem(key);
+}
+
 export function like(user: string, pet: string) {
   writeData(`${LIKE_COLLECTION}/${user}-${pet}`, { user, pet });
 }

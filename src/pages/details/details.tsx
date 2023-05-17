@@ -7,7 +7,11 @@ import { Header } from "../../components/header/header";
 import { authValidate, redirect } from "../../utils/utils";
 
 import { readSubsData, writeData } from "../../utils/firebase";
-import { PETS_COLLECTION, USER_COLLECTION } from "../../utils/constants";
+import {
+  DEFAULT_AVATAR,
+  PETS_COLLECTION,
+  USER_COLLECTION,
+} from "../../utils/constants";
 
 export function Details() {
   const [name, setName] = useState();
@@ -15,7 +19,7 @@ export function Details() {
   const [age, setAge] = useState();
   const [location, setLocation] = useState();
   const [ownerName, setOwnerName] = useState();
-  const [ownerImage, setOwnerImage] = useState();
+  const [ownerImage, setOwnerImage] = useState("");
   const [genre, setGenre] = useState("");
   const [color, setColor] = useState();
   const [race, setRace] = useState();
@@ -30,14 +34,19 @@ export function Details() {
   }, []);
 
   function getOwnerInformations(id: string) {
-    readSubsData(`${USER_COLLECTION}/${id}`, (cb: any) => {
-      setOwnerImage(cb.photo);
+    readSubsData(`${USER_COLLECTION}/${id.toLowerCase()}`, (cb: any) => {
+      console.log(cb, id);
+
+      cb.photo ? setOwnerImage(cb.photo) : setOwnerImage(DEFAULT_AVATAR);
+
       setOwnerName(cb.name);
     });
   }
 
   function getGeneralData() {
     readSubsData(`${PETS_COLLECTION}/${id}`, (cb: any) => {
+      console.log(cb);
+
       setName(cb.petName);
       setAge(cb.petAge);
       setLocation(cb.petLocation);

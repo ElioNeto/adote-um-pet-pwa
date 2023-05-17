@@ -59,7 +59,7 @@ export async function createUser(
   await createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       let sanitizedEmail = email.replace(/[.@_-]/g, "");
-      writeData(`users/${sanitizedEmail}`, data);
+      writeData(`users/${sanitizedEmail.toLowerCase()}`, data);
       return "success";
       // ...
     })
