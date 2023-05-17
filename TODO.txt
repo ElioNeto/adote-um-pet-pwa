@@ -9,3 +9,4 @@ Fazer função logoff
 # favoritos
     Listar
 
+#Loaders
