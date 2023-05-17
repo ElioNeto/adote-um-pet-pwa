@@ -151,6 +151,11 @@ export function Search() {
           </div>
         </form>
       </div>
+      <div>
+        {petData.map((pet: any) => (
+          <p>{pet.data.petName}</p>
+        ))}
+      </div>
       <div className="menu">
         <BottomBar />
       </div>
