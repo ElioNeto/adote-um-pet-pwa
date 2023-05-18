@@ -13,35 +13,84 @@ import { PETS_COLLECTION } from "../../utils/constants";
 import { readSubsData } from "../../utils/firebase";
 
 export function Search() {
+  const [petDataP, setPetDataP] = useState<any[]>([]);
   const [petData, setPetData] = useState<any[]>([]);
   const [formData, setFormData] = useState({
     search: "",
+    search2: "",
+    petSexOptions: "",
+    petAge: 0,
+    petStartWeight: 0,
+    petEndWeight: 100000,
   });
   useEffect(() => {
     if (!authValidate()) redirect("/");
   });
-
   useEffect(() => {
     readSubsData(PETS_COLLECTION, (cb: any) => {
-      let arr: any[] = [];
-      // let cbJson = JSON.stringify(cb);
-
-      //  console.log(cbJson.includes("cat"));
-      Object.keys(cb).forEach((key) => {
-        if (JSON.stringify(cb[key]).includes(formData.search)) {
-          console.log(key); //column01...
-          console.log(cb[key]); //Coluna 01...
-          let obj = {
-            data: cb[key],
-            id: key,
-          };
-          arr.push(obj);
-        }
-      });
-      setPetData(arr);
-      console.log(arr);
+      setPetDataP(cb);
     });
-  }, [formData]);
+  }, []);
+  useEffect(() => {
+    let arr: any[] = [];
+    let cb: any = petDataP;
+    Object.keys(cb).forEach((key) => {
+      if (JSON.stringify(cb[key]).includes(formData.search)) {
+        console.log(key); //column01...
+        console.log(cb[key]); //Coluna 01...
+        let obj = {
+          data: cb[key],
+          id: key,
+        };
+        arr.push(obj);
+      }
+    });
+    setPetData(arr);
+    console.log(arr);
+  }, [formData.search]);
+
+  function debugFormData() {
+    console.log(formData);
+  }
+
+  function filterValidate(e: any): any {
+    e.preventDefault();
+    debugFormData();
+    let arr: any[] = [];
+    let arr2: any[] = [];
+    let cb: any = petDataP;
+
+    Object.keys(cb).forEach((key) => {
+      let obj = {
+        data: cb[key],
+        id: key,
+      };
+      arr2.push(obj);
+    });
+    //sexOption
+    arr2.map((pet: any) => {
+      // console.log(pet);
+      if (
+        pet.data.petSexOptions === formData.petSexOptions ||
+        !formData.petSexOptions
+      ) {
+        if (!formData.petAge || pet.data.petAge === formData.petAge) {
+          if (
+            pet.data.petWeight > formData.petStartWeight &&
+            pet.data.petWeight < formData.petEndWeight
+          ) {
+            let obj = {
+              data: pet.data,
+              id: pet.id,
+            };
+            arr.push(obj);
+          }
+        }
+      }
+    });
+
+    console.log(arr);
+  }
 
   const [isHideFilter, setIsHideFilter] = useState(true);
 
@@ -70,13 +119,23 @@ export function Search() {
           <img src={Logo} alt="logo" />
         </div>
         <form className="form">
-          <input
-            type="text"
-            placeholder="Pesquisar..."
-            name="search"
-            value={formData.search}
-            onChange={(e) => handleChange(e)}
-          />
+          {isHideFilter ? (
+            <input
+              type="text"
+              placeholder="Pesquisar..."
+              name="search"
+              value={formData.search}
+              onChange={(e) => handleChange(e)}
+            />
+          ) : (
+            <input
+              type="text"
+              placeholder="Pesquisar..."
+              name="search2"
+              value={formData.search2}
+              onChange={(e) => handleChange(e)}
+            />
+          )}
           <label
             className="filter-fake-button"
             onClick={hideShowFilter}
@@ -84,32 +143,61 @@ export function Search() {
           >
             {isHideFilter ? "exibir filtros" : "ocultar filtros"}
           </label>
+          <button
+            onClick={(e) => {
+              filterValidate(e);
+            }}
+          >
+            teste
+          </button>
           <div id="filter-contents" className="hide">
             <FormControl>
               <FormLabel id="demo-radio-buttons-group-label">Sexo</FormLabel>
               <RadioGroup
                 aria-labelledby="demo-radio-buttons-group-label"
-                defaultValue="both"
-                name="radio-buttons-group"
+                defaultValue=""
+                name="petSexOptions"
                 className="genre-container"
               >
                 <FormControlLabel
                   value="female"
                   control={<Radio />}
                   label="F"
+                  onChange={(e) => handleChange(e)}
                 />
-                <FormControlLabel value="male" control={<Radio />} label="M" />
                 <FormControlLabel
-                  value="both"
+                  value="male"
+                  control={<Radio />}
+                  label="M"
+                  onChange={(e) => handleChange(e)}
+                />
+                <FormControlLabel
+                  value=""
                   control={<Radio />}
                   label="Ambos"
+                  onChange={(e) => handleChange(e)}
                 />
               </RadioGroup>
             </FormControl>
-            <input type="text" placeholder="Idade" name="petAge" />
+            <input
+              type="number"
+              placeholder="Idade"
+              name="petAge"
+              onChange={(e) => handleChange(e)}
+            />
             <div className="filter-weight">
-              <input type="text" placeholder="Peso(kg)" name="petStartWeight" />
-              <input type="text" placeholder="até" name="petEndWeight" />
+              <input
+                type="number"
+                placeholder="Peso(kg)"
+                name="petStartWeight"
+                onChange={(e) => handleChange(e)}
+              />
+              <input
+                type="number"
+                placeholder="até"
+                name="petEndWeight"
+                onChange={(e) => handleChange(e)}
+              />
             </div>
 
             <input type="text" placeholder="Raça" name="petRace" />
@@ -153,7 +241,7 @@ export function Search() {
       </div>
       <div>
         {petData.map((pet: any) => (
-          <p>{pet.data.petName}</p>
+          <p key={pet.id}>{pet.data.petName}</p>
         ))}
       </div>
       <div className="menu">
