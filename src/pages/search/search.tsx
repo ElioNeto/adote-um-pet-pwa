@@ -22,6 +22,8 @@ export function Search() {
     petAge: 0,
     petStartWeight: 0,
     petEndWeight: 100000,
+    petLocation: "",
+    petOptions: "",
   });
   useEffect(() => {
     if (!authValidate()) redirect("/");
@@ -79,17 +81,28 @@ export function Search() {
             pet.data.petWeight > formData.petStartWeight &&
             pet.data.petWeight < formData.petEndWeight
           ) {
-            let obj = {
-              data: pet.data,
-              id: pet.id,
-            };
-            arr.push(obj);
+            if (
+              !formData.petLocation ||
+              pet.data.petLocation.toLowerCase().includes(formData.petLocation)
+            ) {
+              if (
+                !formData.petOptions ||
+                pet.data.petOptions === formData.petOptions
+              ) {
+                let obj = {
+                  data: pet.data,
+                  id: pet.id,
+                };
+                arr.push(obj);
+              }
+            }
           }
         }
       }
     });
 
     console.log(arr);
+    setPetData(arr);
   }
 
   const [isHideFilter, setIsHideFilter] = useState(true);
@@ -132,8 +145,8 @@ export function Search() {
               type="text"
               placeholder="Pesquisar..."
               name="search2"
-              value={formData.search2}
-              onChange={(e) => handleChange(e)}
+              value={formData.search}
+              disabled
             />
           )}
           <label
@@ -200,9 +213,14 @@ export function Search() {
               />
             </div>
 
-            <input type="text" placeholder="Raça" name="petRace" />
-            <input type="text" placeholder="Cor" name="petColor" />
-            <input type="text" placeholder="Cidade" name="petLocation" />
+            {/*  <input type="text" placeholder="Raça" name="petRace" />
+            <input type="text" placeholder="Cor" name="petColor" /> */}
+            <input
+              type="text"
+              placeholder="Cidade"
+              name="petLocation"
+              onChange={(e) => handleChange(e)}
+            />
             <FormControl>
               <FormLabel id="demo-radio-buttons-group-label">
                 Categorias
@@ -210,39 +228,37 @@ export function Search() {
               <RadioGroup
                 aria-labelledby="demo-radio-buttons-group-label"
                 defaultValue="dog"
-                name="radio-buttons-group"
+                name="petOptions"
                 className="genre-container"
               >
                 <FormControlLabel
                   value="dog"
                   control={<Radio />}
                   label="Cachorro"
+                  onChange={(e) => handleChange(e)}
                 />
                 <FormControlLabel
                   value="cat"
                   control={<Radio />}
                   label="Gato"
+                  onChange={(e) => handleChange(e)}
                 />
                 <FormControlLabel
                   value="othersPets"
                   control={<Radio />}
                   label="Outros pets"
+                  onChange={(e) => handleChange(e)}
                 />
               </RadioGroup>
             </FormControl>
           </div>
-          <label className="see-more">Veja mais</label>
+          <label className="see-more">Pets</label>
           <div className="see-more-card-container">
-            {/* <Card showHeart />
-            <Card showHeart showActions />
-            <Card showHeart /> */}
+            {petData.map((pet: any) => (
+              <Card data={pet} />
+            ))}
           </div>
         </form>
-      </div>
-      <div>
-        {petData.map((pet: any) => (
-          <p key={pet.id}>{pet.data.petName}</p>
-        ))}
       </div>
       <div className="menu">
         <BottomBar />
