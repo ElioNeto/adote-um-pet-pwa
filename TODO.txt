@@ -5,8 +5,10 @@ Fazer função logoff
 
 # Search
     Criar a função para busca
+    Ver como utilizar filtros em logica mais simples
+
 
 # favoritos
-    Listar
+    Criar busca de favoritos com base no Home - Listar
 
 #Loaders
