@@ -4,12 +4,13 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { InfoCard } from "../../components/info-card/info-card";
 import { Header } from "../../components/header/header";
-import { authValidate, redirect } from "../../utils/utils";
+import { authValidate, getSessionItem, redirect } from "../../utils/utils";
 
 import { readSubsData, writeData } from "../../utils/firebase";
 import {
   DEFAULT_AVATAR,
   PETS_COLLECTION,
+  USER,
   USER_COLLECTION,
 } from "../../utils/constants";
 
@@ -25,9 +26,15 @@ export function Details() {
   const [race, setRace] = useState();
   const [weight, setWeight] = useState();
   const [bio, setBio] = useState();
-  const [owner, setOwner] = useState();
-
+  //const [owner, setOwner] = useState();
   let { id } = useParams();
+
+  let user = getSessionItem(USER)!;
+
+  useEffect(() => {
+    if (!authValidate()) redirect("/");
+    else user = getSessionItem(USER)!;
+  }, []);
 
   useEffect(() => {
     getGeneralData();
@@ -57,7 +64,7 @@ export function Details() {
       setRace(cb.petRace);
       setWeight(cb.petWeight);
       getOwnerInformations(cb.petOwner);
-      setOwner(cb.petOwner);
+      //setOwner(cb.petOwner);
     });
   }
 
@@ -76,7 +83,7 @@ export function Details() {
 
   return (
     <div className="detail-container">
-      <Header location="/home" showLike={true} user={owner} pet={id} />
+      <Header location="/home" showLike={true} user={user} pet={id} />
       <div className="image">
         <img src={image} alt="gato ioda" />
       </div>
