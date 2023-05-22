@@ -39,7 +39,7 @@ export function Signup() {
       let rtn = await createUser(formData.email, formData.password, formData);
       login(email, password);
       if ((rtn = "success")) {
-        // homeLogin();
+         homeLogin();
       }
     }
   }
