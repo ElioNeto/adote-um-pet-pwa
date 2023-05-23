@@ -15,8 +15,17 @@ import { authValidate, getSessionItem, redirect } from "../../utils/utils";
 import { writeData } from "../../utils/firebase";
 import { PETS_COLLECTION, USER } from "../../utils/constants";
 import { base64Resize } from "../../utils/resize";
+import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField";
 
 export function Registerpet() {
+
+  const raceOptions = ['Vira-lata', 'Beagle', 'Buldogue', 
+  'Yorkshire', 'Persa', 'Siamês', 'Ragdoll', 'Outra Raça']
+
+  const cityOptions = ['Porto Alegre', 'Lavras', 'Canoas', 
+  'São Paulo', 'Curitiba', 'Florianopolis', 'Outra Cidade']
+
   useEffect(() => {
     if (!authValidate()) redirect("/");
   });
@@ -153,12 +162,13 @@ export function Registerpet() {
           onChange={(e) => handleChange(e)}
           required
         />
-        <input
-          type="text"
+        <Autocomplete
+          options={cityOptions}
           placeholder="Localização"
           name="petLocation"
+          renderInput={(params) =>
+            <TextField {...params} label="Combo box" variant="outlined" />}
           onChange={(e) => handleChange(e)}
-          required
         />
         <input
           type="text"
