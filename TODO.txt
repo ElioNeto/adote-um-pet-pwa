@@ -1,14 +1,8 @@
 Fazer função logoff
-    - remover token do sessionStorage
+    - remover token do sessionStorage (Botao LOGOUT e funcao remove sessionStorage)
+    - Criptografar senha?
 
 # ver funcionalidade "adotado"
 
-# Search
-    Criar a função para busca
-    Ver como utilizar filtros em logica mais simples
-
-
-# favoritos
-    Criar busca de favoritos com base no Home - Listar
 
 #Loaders
