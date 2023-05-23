@@ -10,7 +10,10 @@ import { LIKE_COLLECTION, PETS_COLLECTION, USER } from "../../utils/constants";
 export function Favorites() {
   
   const [petData, setPetData] = useState<any[]>([]);
+ const [isLoading, setIsLoading]= useState(true)
+
   let user = "";
+ // let isLoading = true
 
   useEffect(() => {
     if (!authValidate()) redirect("/");
@@ -18,59 +21,60 @@ export function Favorites() {
   }, []);
 
   useEffect(() => {
-    readSubsData(LIKE_COLLECTION, (cb: any) => {
-      let arr: any[] = [];
-      Object.keys(cb).forEach((key) => {
-        if (cb[key].user === user) {
-          console.log(key); //column01...
-          console.log(cb[key]); //Coluna 01...
-          let obj = {
-            data: cb[key],
-            id: key,
-          };
-          arr.push(obj);
-        }
-      });
-      //like tem o pet (id) e acha petData.pet 
-      setPetData(arr);
-      console.log(arr);
-      readSubsData(PETS_COLLECTION, (pet: any) => {
-        let arrPet: any[] = [];
-        console.log(pet);
-       // petData.map((cbPet: any) => {
-          
-          //if (cbPet.data.pet === pet[])
-       // });
-      });
+    let arr: any[] = [];
+    readSubsData(LIKE_COLLECTION, (like: any) => {
+       readSubsData(PETS_COLLECTION, (pet: any) => {
+        Object.keys(like).forEach((likeKey) => {
+          console.log(like);
+          if(like[likeKey].user === user){
+            Object.keys(pet).forEach((petKey) => {
+if(like[likeKey].pet === petKey){
+console.log(petKey);
+let obj = {
+  data: pet[petKey],
+  id: petKey,
+};
+arr.push(obj)}
+
+            })
+          }
+        })
+        setPetData(arr)
+       })
+       
     });
+
   }, []);
 
-  function getFav() {
-    getFromLocalStorage(USER);
-  }
+/* useEffect(()=> {
+  setTimeout(() => {
+    setIsLoading(false)
+  }, 3000);
+}, []) */
 
   return (
-    <>
-      <div className="logo-fav">
-        <img src={Logo} alt="logo" />
+<>
+  <div className="logo-fav">
+    <img src={Logo} alt="logo" />
+  </div>
+  <div className="container-fav">
+    <div className="carousel-fav">
+      <h2 className="fav-h2">Favoritos</h2>
+      <div className="cards-fav">
+        {/*  <Card />
+        <Card /> */}
       </div>
-      <div className="container-fav">
-        <div className="carousel-fav">
-          <h2 className="fav-h2">Favoritos</h2>
-          <div className="cards-fav">
-            {/*  <Card />
-            <Card /> */}
-          </div>
-          <div className="see-more-card-container">
-            {petData.map((pet: any) => (
-              <Card data={pet} />
-            ))}
-          </div>
-        </div>
+      <div className="see-more-card-container">
+         {petData.map((pet: any) => (
+          <Card data={pet} key={pet.id}/>
+        ))} 
       </div>
-      <div className="menu">
-        <BottomBar />
-      </div>
+    </div>
+  </div>
+  <div className="menu">
+    <BottomBar />
+  </div>
+      
     </>
   );
 }
