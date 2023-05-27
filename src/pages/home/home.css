@@ -13,6 +13,15 @@
   margin: 24px;
 }
 
+.logout {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  height: 28px;
+  width: 45px;
+}
+
+
 .buttons {
   display: flex;
   flex-direction: column;

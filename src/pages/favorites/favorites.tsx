@@ -60,10 +60,6 @@ arr.push(obj)}
   <div className="container-fav">
     <div className="carousel-fav">
       <h2 className="fav-h2">Favoritos</h2>
-      <div className="cards-fav">
-        {/*  <Card />
-        <Card /> */}
-      </div>
       <div className="see-more-card-container">
          {petData.map((pet: any) => (
           <Card data={pet} key={pet.id}/>

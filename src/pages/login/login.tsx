@@ -17,7 +17,7 @@ export function Login() {
     setTimeout(() => {
       let token = getSessionItem(TOKEN);
       if (token) redirect("/home");
-      else console.log("Ocoreu um erro");
+      else console.log("Ocorreu um erro");
     }, 1000);
     //console.log(getAuthToken())
   }

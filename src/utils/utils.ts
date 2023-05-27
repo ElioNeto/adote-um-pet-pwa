@@ -9,6 +9,10 @@ export function getSessionItem(key: string): string | null {
   return sessionStorage.getItem(key);
 }
 
+export function removeSessionItem(key: string) {
+  return sessionStorage.removeItem(key);
+}
+
 export function authValidate(): boolean {
   if (getSessionItem(TOKEN)) return true;
   else return false;

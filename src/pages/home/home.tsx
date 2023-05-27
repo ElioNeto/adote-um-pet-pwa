@@ -3,14 +3,19 @@ import Logo from "../../assets/AdoteUmPet.svg";
 import "./home.css";
 import { Card } from "../../components/card/card";
 import { BottomBar } from "../../components/bottom-bar/bottom-bar";
-import { authValidate, getSessionItem, redirect } from "../../utils/utils";
+import { authValidate, getSessionItem, redirect, removeSessionItem } from "../../utils/utils";
 import { useEffect, useState } from "react";
 import { deleteData, readSubsData } from "../../utils/firebase";
-import { PETS_COLLECTION, USER } from "../../utils/constants";
+import { PETS_COLLECTION, TOKEN, USER } from "../../utils/constants";
 
 export function Home() {
   const [petData, setPetData] = useState<any[]>([]);
   let user = "";
+
+  function handleSubmit() {
+    removeSessionItem("token");
+    redirect("/");
+  }
 
   useEffect(() => {
     if (!authValidate()) redirect("/");
@@ -40,6 +45,11 @@ export function Home() {
     <>
       <div className="logo">
         <img src={Logo} alt="logo" />
+      </div>
+      <div className="form">
+        <button className="logout" onClick={() => {handleSubmit()}}>
+        Sair
+        </button>
       </div>
       <div className="container">
         <div className="buttons">

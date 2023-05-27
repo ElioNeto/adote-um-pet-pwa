@@ -161,7 +161,7 @@ export function Search() {
               filterValidate(e);
             }}
           >
-            teste
+            Buscar
           </button>
           <div id="filter-contents" className="hide">
             <FormControl>
