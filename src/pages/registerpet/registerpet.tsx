@@ -162,13 +162,12 @@ export function Registerpet() {
           onChange={(e) => handleChange(e)}
           required
         />
-        <Autocomplete
-          options={cityOptions}
+        <input
+          type="text"
           placeholder="Localização"
           name="petLocation"
-          renderInput={(params) =>
-            <TextField {...params} label="Combo box" variant="outlined" />}
           onChange={(e) => handleChange(e)}
+          required
         />
         <input
           type="text"
