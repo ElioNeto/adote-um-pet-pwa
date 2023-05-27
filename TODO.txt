@@ -1,6 +1,4 @@
-Fazer função logoff
-    - remover token do sessionStorage (Botao LOGOUT e funcao remove sessionStorage)
-    - Criptografar senha?
+Criptografar senha?
 
 Animacao do Favorito
     Ao clicar em favorito mudar cor ou preencher algo assim
