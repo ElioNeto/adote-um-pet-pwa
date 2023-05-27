@@ -66,7 +66,7 @@ export function Login() {
       </div>
       <div className="form">
         <button className="signup" onClick={() => redirect("/signup")}>
-          cadastre-se
+          Cadastre-se
         </button>
       </div>
     </div>
