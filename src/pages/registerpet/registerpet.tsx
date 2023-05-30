@@ -148,6 +148,7 @@ export function Registerpet() {
             />
           </RadioGroup>
         </FormControl>
+        <label className="label">Nome do Pet</label>
         <input
           type="text"
           placeholder="Nome"
@@ -155,6 +156,7 @@ export function Registerpet() {
           onChange={(e) => handleChange(e)}
           required
         />
+        <label className="label">Raça</label>
         <input
           type="text"
           placeholder="Raça"
@@ -162,6 +164,7 @@ export function Registerpet() {
           onChange={(e) => handleChange(e)}
           required
         />
+        <label className="label">Localização</label>
         <input
           type="text"
           placeholder="Localização"
@@ -169,6 +172,7 @@ export function Registerpet() {
           onChange={(e) => handleChange(e)}
           required
         />
+        <label className="label">Cor</label>
         <input
           type="text"
           placeholder="Cor"
@@ -176,6 +180,7 @@ export function Registerpet() {
           onChange={(e) => handleChange(e)}
           required
         />
+        <label className="label">Peso</label>
         <input
           type="text"
           placeholder="Peso"
@@ -183,6 +188,7 @@ export function Registerpet() {
           onChange={(e) => handleChange(e)}
           required
         />
+        <label className="label">Idade</label>
         <input
           type="text"
           placeholder="Idade"
@@ -190,6 +196,7 @@ export function Registerpet() {
           onChange={(e) => handleChange(e)}
           required
         />
+        <label className="label">Fale algo sobre o Pet</label>
         <input
           type="text"
           placeholder="Fale algo sobre o PET"
@@ -218,6 +225,7 @@ export function Registerpet() {
             />
           </RadioGroup>
         </FormControl>
+        <label className="label">Foto do Pet</label>
         <input
           type="file"
           placeholder="Foto do Pet"
