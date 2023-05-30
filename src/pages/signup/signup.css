@@ -17,9 +17,9 @@ img {
   flex-direction: column;
 }
 
-.radio-button {
+.radio-button { 
   display: flex;
-  flex-direction: row;
+  flex-direction: row !important;
 }
 
 input {

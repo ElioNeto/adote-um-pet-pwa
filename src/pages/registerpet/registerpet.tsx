@@ -123,10 +123,12 @@ export function Registerpet() {
       </div>
       <form className="form" onSubmit={(e) => handleValidation(e)}>
         <FormControl>
+          <FormLabel id="demo-radio-buttons-group-label">PET</FormLabel>
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
             defaultValue="dog"
             name="petOptions"
+            className="radio-button"
           >
             <FormControlLabel
               value="dog"
@@ -210,6 +212,7 @@ export function Registerpet() {
             aria-labelledby="demo-radio-buttons-group-label"
             defaultValue="female"
             name="petSexOptions"
+            className="radio-button"
           >
             <FormControlLabel
               value="female"
