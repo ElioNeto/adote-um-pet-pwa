@@ -36,10 +36,13 @@ export function Signup() {
     console.log(formData);
 
     if (handleValidation(e)) {
+      console.log("passou");
       let rtn = await createUser(formData.email, formData.password, formData);
-      login(email, password);
-      if ((rtn = "success")) {
-         homeLogin();
+      let rtnLog = login(email, password);
+      
+      if (rtn === rtnLog) {
+        //console.log(" SIMSIMSIMSIMSIMSIMS");
+        homeLogin();
       }
     }
   }
@@ -77,30 +80,6 @@ export function Signup() {
     }
     return formIsValid;
   }
-  /* function TestaCPF(strCPF: any) {
-    let Soma;
-    let Resto;
-    Soma = 0;
-
-    if (strCPF == "00000000000") return false;
-
-    for (let i = 1; i <= 9; i++)
-      Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (11 - i);
-    Resto = (Soma * 10) % 11;
-
-    if (Resto == 10 || Resto == 11) Resto = 0;
-    if (Resto != parseInt(strCPF.substring(9, 10))) return false;
-
-    Soma = 0;
-    for (let i = 1; i <= 10; i++)
-      Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (12 - i);
-    Resto = (Soma * 10) % 11;
-
-    if (Resto == 10 || Resto == 11) Resto = 0;
-    if (Resto != parseInt(strCPF.substring(10, 11))) return false;
-
-    return true;
-  } */
 
   function TestaCPF(strCPF: any): boolean {
     if (typeof strCPF !== "string") {
@@ -154,6 +133,7 @@ export function Signup() {
         <img src={Logo} alt="logo" />
       </div>
       <form className="form" onSubmit={(e) => create(e)}>
+        <label className="label">Nome</label>
         <input
           type="text"
           placeholder="Nome"
@@ -162,6 +142,7 @@ export function Signup() {
           onChange={(e) => handleChange(e)}
           required
         />
+        <label className="label">Email</label>
         <input
           type="text"
           placeholder="Email"
@@ -170,6 +151,7 @@ export function Signup() {
           onChange={(e) => handleChange(e)}
           required
         />
+        <label className="label">Telefone</label>
         <input
           type="text"
           placeholder="Telefone"
@@ -179,6 +161,7 @@ export function Signup() {
           required
         />
         <div>
+        <label className="label">CPF</label>
           <input
             type="text"
             placeholder="CPF"
@@ -189,6 +172,7 @@ export function Signup() {
           />
         </div>
         <span>{erros}</span>
+        <label className="label">Data de Nascimento</label>
         <input
           type="text"
           placeholder="Data de Nascimento"
@@ -197,6 +181,7 @@ export function Signup() {
           onChange={(e) => handleChange(e)}
           required
         />
+        <label className="label">Senha</label>
         <input
           type="password"
           placeholder="Senha"
@@ -234,6 +219,7 @@ export function Signup() {
             />
           </RadioGroup>
         </FormControl>
+        <label className="label">Foto de Perfil</label>
         <input
           type="file"
           placeholder="Foto de Perfil"

@@ -105,6 +105,11 @@ a {
   );
 }
 
+.label {
+  
+  color: #ffffff;
+}
+
 span {
   font-family: "Outfit";
   font-style: normal;

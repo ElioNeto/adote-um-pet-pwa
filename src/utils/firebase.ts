@@ -81,7 +81,7 @@ export function login(email: string, password: string): any {
         let sanitizedEmail = email.replace(/[.@_-]/g, "");
         sessionStorage.setItem(USER, sanitizedEmail);
       });
-      return "sucesso";
+      return "success";
     })
     .catch((error) => {
       //const errorCode = error.code;
