@@ -20,7 +20,7 @@ export function Login() {
     setTimeout(() => {
       let token = getSessionItem(TOKEN);
       if (token) redirect("/home");
-      else setMsg("Usuário ou senha inválidos!");
+      else setMsg("Email ou senha inválido(s)!");
     }, 1000);
   }
 
