@@ -194,7 +194,7 @@ export function Search() {
               <FormLabel id="demo-radio-buttons-group-label">Sexo</FormLabel>
               <RadioGroup
                 aria-labelledby="demo-radio-buttons-group-label"
-                defaultValue=""
+                defaultValue="ambos"
                 name="petSexOptions"
                 className="genre-container"
               >
