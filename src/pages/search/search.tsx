@@ -20,8 +20,8 @@ export function Search() {
     search2: "",
     petSexOptions: "",
     petAge: 0,
-    petStartWeight: 0,
-    petEndWeight: 100000,
+    petStartWeight: Number,
+    petEndWeight: Number,
     petLocation: "",
     petOptions: "",
   });
@@ -101,8 +101,8 @@ export function Search() {
           console.log("HERE: " + formData.petStartWeight);
           console.log("END: " + formData.petEndWeight);
           if (
-            (parseInt(pet.data.petWeight) >= parseInt(formData.petStartWeight) &&
-            parseInt(pet.data.petWeight) <= parseInt(formData.petEndWeight)) || (!formData.petStartWeight && !formData.petEndWeight)
+            (parseInt(pet.data.petWeight) >= Number(formData.petStartWeight) &&
+            parseInt(pet.data.petWeight) <= Number(formData.petEndWeight)) || (!formData.petStartWeight && !formData.petEndWeight)
           ) {
             if (
               !formData.petLocation ||
