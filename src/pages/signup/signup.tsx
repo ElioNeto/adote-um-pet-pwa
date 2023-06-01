@@ -67,7 +67,7 @@ export function Signup() {
   }
   const [erros, setErrors] = useState("");
 
-  function handleValidation(e: any) {
+function handleValidation(e: any) {
     e.preventDefault();
     let formIsValid = true;
     setErrors("");
@@ -78,6 +78,15 @@ export function Signup() {
         setErrors("CPF inválido!");
       }
     }
+
+    if (typeof formData.email !== "undefined") {
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(formData.email)) {
+        formIsValid = false;
+        setErrors("Email inválido!");
+      }
+    }
+
     return formIsValid;
   }
 
