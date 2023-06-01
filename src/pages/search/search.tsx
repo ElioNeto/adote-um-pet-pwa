@@ -12,6 +12,10 @@ import { Card } from "../../components/card/card";
 import { PETS_COLLECTION } from "../../utils/constants";
 import { readSubsData } from "../../utils/firebase";
 
+function isEmpty(value: any) {
+  return value === undefined || value === "";
+}
+
 export function Search() {
   const [petDataP, setPetDataP] = useState<any[]>([]);
   const [petData, setPetData] = useState<any[]>([]);
@@ -88,9 +92,10 @@ export function Search() {
         console.log("PET: " + pet.data.petLocation);
         console.log("PET: " + pet.data.petAge);
         console.log("PET: " + pet.data.petWeight);
-        console.log(pet.data.petWeight >= formData.petStartWeight);
-        console.log(pet.data.petWeight <= formData.petEndWeight);
-        console.log("HERE: " + formData.petOptions);
+        console.log(isEmpty(formData.petStartWeight));
+        console.log(formData.petStartWeight === undefined);
+        console.log(isNaN(Number(formData.petStartWeight)));
+        console.log("HERE: " + formData.petStartWeight + "A");
         console.log("HERE: " + formData.petLocation);
       
       if (
@@ -101,7 +106,7 @@ export function Search() {
           
           if (
             (parseInt(pet.data.petWeight) >= Number(formData.petStartWeight) &&
-            parseInt(pet.data.petWeight) <= Number(formData.petEndWeight)) || (typeof formData.petStartWeight !== "undefined" && typeof formData.petEndWeight !== "undefined")
+            parseInt(pet.data.petWeight) <= Number(formData.petEndWeight)) || (isEmpty(formData.petStartWeight) && isEmpty(formData.petEndWeight))
           ) {
             if (
               !formData.petLocation ||
