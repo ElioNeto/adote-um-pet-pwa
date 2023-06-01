@@ -16,7 +16,6 @@ export function Login() {
 
     email = email.toLowerCase();
 
-    console.log(email);
     login(email, password);
     setTimeout(() => {
       let token = getSessionItem(TOKEN);
