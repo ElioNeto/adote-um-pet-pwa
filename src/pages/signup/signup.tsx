@@ -12,14 +12,10 @@ import Stack from "@mui/material/Stack";
 import { useState } from "react";
 import { createUser, login } from "../../utils/firebase";
 import { base64Resize } from "../../utils/resize";
+import { authValidate, getSessionItem, redirect } from "../../utils/utils";
+import { TOKEN, USER } from "../../utils/constants";
 
 export function Signup() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const homeLogin = () => {
-    window.location.href = "/home";
-  };
 
   const [formData, setFormData] = useState({
     name: "",
@@ -31,26 +27,64 @@ export function Signup() {
     genre: "",
     photo: "",
   });
+
   async function create(e: any) {
     e.preventDefault();
-    console.log(formData);
+    //console.log(formData);
 
     if (handleValidation(e)) {
-      console.log("passou");
-      let rtn = await createUser(formData.email, formData.password, formData);
-      let rtnLog = login(email, password);
       
-      if (rtn === rtnLog) {
-        //console.log(" SIMSIMSIMSIMSIMSIMS");
-        homeLogin();
-      }
+      await createUser(formData.email, formData.password, formData);
+      login(formData.email, formData.password);
+      
+      setTimeout(() => {
+        let token = getSessionItem(TOKEN);
+
+        if (token) redirect("/home");
+        else setErrors("Ocorreu um erro no cadastro!");
+      }, 1000);
+      
     }
+  }
+
+  const cpfMask = (value: string) => {
+    return value
+      .replace(/\D/g, '') // substitui qualquer caracter que nao seja numero por nada
+      .replace(/(\d{3})(\d)/, '$1.$2') // captura 2 grupos de numero o primeiro de 3 e o segundo de 1, apos capturar o primeiro grupo ele adiciona um ponto antes do segundo grupo de numero
+      .replace(/(\d{3})(\d)/, '$1.$2')
+      .replace(/(\d{3})(\d{1,2})/, '$1-$2')
+      .replace(/(-\d{2})\d+?$/, '$1') // captura 2 numeros seguidos de um traço e não deixa ser digitado mais nada
+  }
+
+  const phoneMask = (value: any) => {
+    if (!value) return ""
+    value = value.replace(/\D/g,'')
+    value = value.replace(/(\d{2})(\d)/,"($1) $2")
+    value = value.replace(/(\d)(\d{4})$/,"$1-$2")
+    return value
+  }
+
+  const dateMask = (value: any) => {
+    if (!value) return ""
+    value = value.replace(/\D/g,'')
+    value = value.replace(/(\d{2})(\d)/,"$1/$2")
+    value = value.replace(/(\d{2})(\d)/,"$1/$2")
+    return value
   }
 
   function handleChange(e: any) {
     e.preventDefault();
 
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (e.target.name === "CPF") {
+      setFormData({ ...formData, [e.target.name]: cpfMask(e.target.value) });
+    } else if (e.target.name === "birth") {
+      setFormData({ ...formData, [e.target.name]: dateMask(e.target.value) });
+    } else if (e.target.name === "tel") {
+      setFormData({ ...formData, [e.target.name]: phoneMask(e.target.value) }); 
+    } else {
+      setFormData({ ...formData, [e.target.name]: e.target.value });
+    }
+    
   }
 
   function handleFileChange(evt: any) {
@@ -76,7 +110,7 @@ function handleValidation(e: any) {
       if (!TestaCPF(formData.CPF)) {
         formIsValid = false;
         setErrors("CPF inválido!");
-      }
+      } 
     }
 
     if (typeof formData.email !== "undefined") {
@@ -166,6 +200,7 @@ function handleValidation(e: any) {
           placeholder="Telefone"
           value={formData.tel}
           name="tel"
+          maxLength={15}
           onChange={(e) => handleChange(e)}
           required
         />
@@ -180,13 +215,13 @@ function handleValidation(e: any) {
             required
           />
         </div>
-        <span>{erros}</span>
         <label className="label">Data de Nascimento</label>
         <input
           type="text"
           placeholder="Data de Nascimento"
           value={formData.birth}
           name="birth"
+          maxLength={10}
           onChange={(e) => handleChange(e)}
           required
         />
@@ -235,7 +270,9 @@ function handleValidation(e: any) {
           name="photo"
           onChange={(e) => handleFileChange(e)}
         />
+        <span>{erros}</span>
         <button type="submit">Cadastrar</button>
+        
       </form>
     </div>
   );

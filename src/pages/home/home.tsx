@@ -13,7 +13,7 @@ export function Home() {
   let user = "";
 
   function handleSubmit() {
-    removeSessionItem("token");
+    removeSessionItem(TOKEN);
     redirect("/");
   }
 

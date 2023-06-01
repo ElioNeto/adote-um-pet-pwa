@@ -25,6 +25,18 @@ export function Search() {
     petLocation: "",
     petOptions: "",
   });
+
+  const negativeMask = (value: any) => {
+    if (!value) return ""
+    value = value.replace(/\D/g,'')
+    console.log(value);
+    if (value < 0) {
+      value = ''; 
+      console.log(value);
+    }
+    return value
+  }
+
   useEffect(() => {
     if (!authValidate()) redirect("/");
   });
@@ -71,15 +83,26 @@ export function Search() {
     });
     //sexOption
     arr2.map((pet: any) => {
-      // console.log(pet);
       if (
         pet.data.petSexOptions === formData.petSexOptions ||
         !formData.petSexOptions
       ) {
         if (!formData.petAge || pet.data.petAge === formData.petAge) {
+          console.log("PET: " + pet.data.petOptions);
+          console.log("PET: " + pet.data.petLocation);
+          console.log("PET: " + pet.data.petAge);
+          console.log("PET: " + pet.data.petWeight);
+          console.log(pet.data.petWeight >= formData.petStartWeight);
+          console.log(pet.data.petWeight <= formData.petEndWeight);
+          console.log(!formData.petStartWeight && !formData.petEndWeight);
+          console.log("HERE: " + formData.petOptions);
+          console.log("HERE: " + formData.petLocation);
+          console.log("HERE: " + formData.petAge);
+          console.log("HERE: " + formData.petStartWeight);
+          console.log("END: " + formData.petEndWeight);
           if (
-            pet.data.petWeight > formData.petStartWeight &&
-            pet.data.petWeight < formData.petEndWeight
+            (parseInt(pet.data.petWeight) >= parseInt(formData.petStartWeight) &&
+            parseInt(pet.data.petWeight) <= parseInt(formData.petEndWeight)) || (!formData.petStartWeight && !formData.petEndWeight)
           ) {
             if (
               !formData.petLocation ||
@@ -122,6 +145,17 @@ export function Search() {
   function handleChange(e: any) {
     e.preventDefault();
 
+    if (e.target.name === 'petAge' || e.target.name ===  "petStartWeight" || e.target.name ===  "petEndWeight") {
+      e.target.value = e.target.value.replace(/[^0-9]/g, ''); // Remove caracteres não numéricos
+      if (e.target.value === '') {
+        e.target.value = ''; // Caso todos os caracteres sejam removidos, define o valor como uma string vazia
+      } else {
+        e.target.value = parseInt(e.target.value, 10); // Converte a string numérica para um número inteiro
+        if (e.target.value < 0) {
+          e.target.value = ''; // Caso o número seja negativo, define o valor como uma string vazia
+        }
+      }
+    }
     setFormData({ ...formData, [e.target.name]: e.target.value });
   }
 
@@ -156,13 +190,6 @@ export function Search() {
           >
             {isHideFilter ? "exibir filtros" : "ocultar filtros"}
           </label>
-          <button
-            onClick={(e) => {
-              filterValidate(e);
-            }}
-          >
-            Buscar
-          </button>
           <div id="filter-contents" className="hide">
             <FormControl>
               <FormLabel id="demo-radio-buttons-group-label">Sexo</FormLabel>
@@ -196,6 +223,7 @@ export function Search() {
               type="number"
               placeholder="Idade"
               name="petAge"
+              min={0}
               onChange={(e) => handleChange(e)}
             />
             <div className="filter-weight">
@@ -203,12 +231,14 @@ export function Search() {
                 type="number"
                 placeholder="Peso(kg)"
                 name="petStartWeight"
+                min={0}
                 onChange={(e) => handleChange(e)}
               />
               <input
                 type="number"
                 placeholder="até"
                 name="petEndWeight"
+                min={0}
                 onChange={(e) => handleChange(e)}
               />
             </div>
@@ -252,6 +282,13 @@ export function Search() {
               </RadioGroup>
             </FormControl>
           </div>
+          <button
+            onClick={(e) => {
+              filterValidate(e);
+            }}
+          >
+            Buscar
+          </button>
           <label className="see-more">Pets</label>
           <div className="see-more-card-container">
             {petData.map((pet: any) => (

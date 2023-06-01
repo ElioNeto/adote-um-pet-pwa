@@ -19,7 +19,6 @@ export function Login() {
       if (token) redirect("/home");
       else console.log("Ocorreu um erro");
     }, 1000);
-    //console.log(getAuthToken())
   }
 
   return (
@@ -43,9 +42,7 @@ export function Login() {
 
         {msg !== "" && <span>{msg}</span>}
 
-        <div className="forgot-container">
-          <a href="/home">esqueceu sua senha?</a>
-        </div>
+        
         <button type="submit">Acessar</button>
       </form>
       <div className="alternative">

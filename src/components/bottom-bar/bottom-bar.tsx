@@ -13,15 +13,6 @@ export function BottomBar() {
         <FaHome className="icon-menu" />
         <span className="active">Início</span>
       </div>
-      <div
-        className="item-menu"
-        onClick={() => {
-          redirect("/chat");
-        }}
-      >
-        <FaComment className="icon-menu" />
-        <span>Conversas</span>
-      </div>
     </div>
   );
 }
