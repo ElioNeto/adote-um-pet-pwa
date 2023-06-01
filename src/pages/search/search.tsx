@@ -83,26 +83,25 @@ export function Search() {
     });
     //sexOption
     arr2.map((pet: any) => {
+      console.log("PET: " + pet.data.petOptions);
+      console.log("HERE: " + pet.data.petName);
+        console.log("PET: " + pet.data.petLocation);
+        console.log("PET: " + pet.data.petAge);
+        console.log("PET: " + pet.data.petWeight);
+        console.log(pet.data.petWeight >= formData.petStartWeight);
+        console.log(pet.data.petWeight <= formData.petEndWeight);
+        console.log("HERE: " + formData.petOptions);
+        console.log("HERE: " + formData.petLocation);
+      
       if (
         pet.data.petSexOptions === formData.petSexOptions ||
-        !formData.petSexOptions
+        formData.petSexOptions === "ambos"
       ) {
         if (!formData.petAge || pet.data.petAge === formData.petAge) {
-         /* console.log("PET: " + pet.data.petOptions);
-          console.log("PET: " + pet.data.petLocation);
-          console.log("PET: " + pet.data.petAge);
-          console.log("PET: " + pet.data.petWeight);
-          console.log(pet.data.petWeight >= formData.petStartWeight);
-          console.log(pet.data.petWeight <= formData.petEndWeight);
-          console.log(!formData.petStartWeight && !formData.petEndWeight);
-          console.log("HERE: " + formData.petOptions);
-          console.log("HERE: " + formData.petLocation);
-          console.log("HERE: " + formData.petAge);
-          console.log("HERE: " + formData.petStartWeight);
-          console.log("END: " + formData.petEndWeight);*/
+          
           if (
             (parseInt(pet.data.petWeight) >= Number(formData.petStartWeight) &&
-            parseInt(pet.data.petWeight) <= Number(formData.petEndWeight)) || (!formData.petStartWeight && !formData.petEndWeight)
+            parseInt(pet.data.petWeight) <= Number(formData.petEndWeight)) || (typeof formData.petStartWeight !== "undefined" && typeof formData.petEndWeight !== "undefined")
           ) {
             if (
               !formData.petLocation ||
@@ -212,7 +211,7 @@ export function Search() {
                   onChange={(e) => handleChange(e)}
                 />
                 <FormControlLabel
-                  value=""
+                  value="ambos"
                   control={<Radio />}
                   label="Ambos"
                   onChange={(e) => handleChange(e)}
