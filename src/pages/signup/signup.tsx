@@ -17,6 +17,9 @@ import { TOKEN, USER } from "../../utils/constants";
 
 export function Signup() {
 
+  const [erros, setErrors] = useState("");
+  const [erroCPF, setErrorsCPF] = useState("");
+  const [errosEmail, setErrorsEmail] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -99,17 +102,17 @@ export function Signup() {
     };
     console.log(formData);
   }
-  const [erros, setErrors] = useState("");
 
 function handleValidation(e: any) {
     e.preventDefault();
     let formIsValid = true;
-    setErrors("");
+    setErrorsCPF("");
+    setErrorsEmail("");
 
     if (typeof formData.CPF !== "undefined") {
       if (!TestaCPF(formData.CPF)) {
         formIsValid = false;
-        setErrors("CPF inválido!");
+        setErrorsCPF("CPF inválido!");
       } 
     }
 
@@ -117,7 +120,7 @@ function handleValidation(e: any) {
       const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailPattern.test(formData.email)) {
         formIsValid = false;
-        setErrors("Email inválido!");
+        setErrorsEmail("Email inválido!");
       }
     }
 
@@ -194,6 +197,7 @@ function handleValidation(e: any) {
           onChange={(e) => handleChange(e)}
           required
         />
+        <span>{errosEmail}</span>
         <label className="label">Telefone</label>
         <input
           type="text"
@@ -215,6 +219,7 @@ function handleValidation(e: any) {
             required
           />
         </div>
+        <span>{erroCPF}</span>
         <label className="label">Data de Nascimento</label>
         <input
           type="text"
