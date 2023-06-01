@@ -13,7 +13,7 @@ export function Chats() {
           <input type="text" placeholder="Pesquisar..." name="search"/>
         </div>
       </div>
-      <div className="menu"> 
+      <div className="menu" style={{ marginBottom: '100px' }}> 
         <BottomBar />
       </div>
     </>

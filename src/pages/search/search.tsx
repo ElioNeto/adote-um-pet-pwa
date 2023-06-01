@@ -88,7 +88,7 @@ export function Search() {
         !formData.petSexOptions
       ) {
         if (!formData.petAge || pet.data.petAge === formData.petAge) {
-          console.log("PET: " + pet.data.petOptions);
+         /* console.log("PET: " + pet.data.petOptions);
           console.log("PET: " + pet.data.petLocation);
           console.log("PET: " + pet.data.petAge);
           console.log("PET: " + pet.data.petWeight);
@@ -99,7 +99,7 @@ export function Search() {
           console.log("HERE: " + formData.petLocation);
           console.log("HERE: " + formData.petAge);
           console.log("HERE: " + formData.petStartWeight);
-          console.log("END: " + formData.petEndWeight);
+          console.log("END: " + formData.petEndWeight);*/
           if (
             (parseInt(pet.data.petWeight) >= Number(formData.petStartWeight) &&
             parseInt(pet.data.petWeight) <= Number(formData.petEndWeight)) || (!formData.petStartWeight && !formData.petEndWeight)
@@ -297,7 +297,7 @@ export function Search() {
           </div>
         </form>
       </div>
-      <div className="menu">
+      <div className="menu" style={{ marginBottom: '100px' }}>
         <BottomBar />
       </div>
     </>

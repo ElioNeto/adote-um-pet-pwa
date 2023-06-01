@@ -17,6 +17,7 @@ import { PETS_COLLECTION, USER } from "../../utils/constants";
 import { base64Resize } from "../../utils/resize";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
+import { BottomBar } from "../../components/bottom-bar/bottom-bar";
 
 export function Registerpet() {
 
@@ -117,128 +118,133 @@ export function Registerpet() {
   }
 
   return (
-    <div className="container">
-      <div className="logo">
-        <img src={Logo} alt="logo" />
-      </div>
-      <form className="form" onSubmit={(e) => handleValidation(e)}>
-        <FormControl>
-          <FormLabel id="demo-radio-buttons-group-label">PET</FormLabel>
-          <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
-            defaultValue="dog"
-            name="petOptions"
-            className="radio-button"
-          >
-            <FormControlLabel
-              value="dog"
-              control={<Radio />}
-              label="Cachorro"
-              onChange={(e) => handleChange(e)}
-            />
-            <FormControlLabel
-              value="cat"
-              control={<Radio />}
-              label="Gato"
-              onChange={(e) => handleChange(e)}
-            />
-            <FormControlLabel
-              value="othersPets"
-              control={<Radio />}
-              label="Outros pets"
-              onChange={(e) => handleChange(e)}
-            />
-          </RadioGroup>
-        </FormControl>
-        <label className="label">Nome do Pet</label>
-        <input
-          type="text"
-          placeholder="Nome"
-          name="petName"
-          onChange={(e) => handleChange(e)}
-          required
-        />
-        <label className="label">Raça</label>
-        <input
-          type="text"
-          placeholder="Raça"
-          name="petRace"
-          onChange={(e) => handleChange(e)}
-          required
-        />
-        <label className="label">Localização</label>
-        <input
-          type="text"
-          placeholder="Localização"
-          name="petLocation"
-          onChange={(e) => handleChange(e)}
-          required
-        />
-        <label className="label">Cor</label>
-        <input
-          type="text"
-          placeholder="Cor"
-          name="petColor"
-          onChange={(e) => handleChange(e)}
-          required
-        />
-        <label className="label">Peso</label>
-        <input
-          type="text"
-          placeholder="Peso"
-          name="petWeight"
-          onChange={(e) => handleChange(e)}
-          required
-        />
-        <label className="label">Idade</label>
-        <input
-          type="text"
-          placeholder="Idade"
-          name="petAge"
-          onChange={(e) => handleChange(e)}
-          required
-        />
-        <label className="label">Fale algo sobre o Pet</label>
-        <input
-          type="text"
-          placeholder="Fale algo sobre o PET"
-          name="petInfo"
-          onChange={(e) => handleChange(e)}
-        />
+    <>
+      <div className="container">
+        <div className="logo">
+          <img src={Logo} alt="logo" />
+        </div>
+        <form className="form" onSubmit={(e) => handleValidation(e)}>
+          <FormControl>
+            <FormLabel id="demo-radio-buttons-group-label">PET</FormLabel>
+            <RadioGroup
+              aria-labelledby="demo-radio-buttons-group-label"
+              defaultValue="dog"
+              name="petOptions"
+              className="radio-button"
+            >
+              <FormControlLabel
+                value="dog"
+                control={<Radio />}
+                label="Cachorro"
+                onChange={(e) => handleChange(e)}
+              />
+              <FormControlLabel
+                value="cat"
+                control={<Radio />}
+                label="Gato"
+                onChange={(e) => handleChange(e)}
+              />
+              <FormControlLabel
+                value="othersPets"
+                control={<Radio />}
+                label="Outros pets"
+                onChange={(e) => handleChange(e)}
+              />
+            </RadioGroup>
+          </FormControl>
+          <label className="label">Nome do Pet</label>
+          <input
+            type="text"
+            placeholder="Nome"
+            name="petName"
+            onChange={(e) => handleChange(e)}
+            required
+          />
+          <label className="label">Raça</label>
+          <input
+            type="text"
+            placeholder="Raça"
+            name="petRace"
+            onChange={(e) => handleChange(e)}
+            required
+          />
+          <label className="label">Localização</label>
+          <input
+            type="text"
+            placeholder="Localização"
+            name="petLocation"
+            onChange={(e) => handleChange(e)}
+            required
+          />
+          <label className="label">Cor</label>
+          <input
+            type="text"
+            placeholder="Cor"
+            name="petColor"
+            onChange={(e) => handleChange(e)}
+            required
+          />
+          <label className="label">Peso</label>
+          <input
+            type="text"
+            placeholder="Peso"
+            name="petWeight"
+            onChange={(e) => handleChange(e)}
+            required
+          />
+          <label className="label">Idade</label>
+          <input
+            type="text"
+            placeholder="Idade"
+            name="petAge"
+            onChange={(e) => handleChange(e)}
+            required
+          />
+          <label className="label">Fale algo sobre o Pet</label>
+          <input
+            type="text"
+            placeholder="Fale algo sobre o PET"
+            name="petInfo"
+            onChange={(e) => handleChange(e)}
+          />
 
-        <FormControl>
-          <FormLabel id="demo-radio-buttons-group-label">Sexo</FormLabel>
-          <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
-            defaultValue="female"
-            name="petSexOptions"
-            className="radio-button"
-          >
-            <FormControlLabel
-              value="female"
-              control={<Radio />}
-              label="F"
-              onChange={(e) => handleChange(e)}
-            />
-            <FormControlLabel
-              value="male"
-              control={<Radio />}
-              label="M"
-              onChange={(e) => handleChange(e)}
-            />
-          </RadioGroup>
-        </FormControl>
-        <label className="label">Foto do Pet</label>
-        <input
-          type="file"
-          placeholder="Foto do Pet"
-          name="petPic"
-          onChange={(e) => handleFileChange(e)}
-        />
-        <span>{erros}</span>
-        <button>Cadastrar o PET</button>
-      </form>
-    </div>
+          <FormControl>
+            <FormLabel id="demo-radio-buttons-group-label">Sexo</FormLabel>
+            <RadioGroup
+              aria-labelledby="demo-radio-buttons-group-label"
+              defaultValue="female"
+              name="petSexOptions"
+              className="radio-button"
+            >
+              <FormControlLabel
+                value="female"
+                control={<Radio />}
+                label="F"
+                onChange={(e) => handleChange(e)}
+              />
+              <FormControlLabel
+                value="male"
+                control={<Radio />}
+                label="M"
+                onChange={(e) => handleChange(e)}
+              />
+            </RadioGroup>
+          </FormControl>
+          <label className="label">Foto do Pet</label>
+          <input
+            type="file"
+            placeholder="Foto do Pet"
+            name="petPic"
+            onChange={(e) => handleFileChange(e)}
+          />
+          <span>{erros}</span>
+          <button>Cadastrar o PET</button>
+        </form>
+      </div>
+      <div className="menu" style={{ marginBottom: '100px' }}>
+        <BottomBar />
+      </div>
+    </>
   );
 }
 

@@ -94,7 +94,7 @@ export function Home() {
           </div>
         </div>
       </div>
-      <div className="menu">
+      <div className="menu" style={{ marginBottom: '100px' }}>
         <BottomBar />
       </div>
     </>
