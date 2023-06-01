@@ -128,7 +128,7 @@ export function Registerpet() {
             <FormLabel id="demo-radio-buttons-group-label">PET</FormLabel>
             <RadioGroup
               aria-labelledby="demo-radio-buttons-group-label"
-              defaultValue="dog"
+              defaultValue=""
               name="petOptions"
               className="radio-button"
             >
@@ -212,7 +212,7 @@ export function Registerpet() {
             <FormLabel id="demo-radio-buttons-group-label">Sexo</FormLabel>
             <RadioGroup
               aria-labelledby="demo-radio-buttons-group-label"
-              defaultValue="female"
+              defaultValue=""
               name="petSexOptions"
               className="radio-button"
             >
