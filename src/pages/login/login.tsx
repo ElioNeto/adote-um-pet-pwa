@@ -7,12 +7,16 @@ import { login } from "../../utils/firebase";
 import { TOKEN } from "../../utils/constants";
 
 export function Login() {
-  const [email, setEmail] = useState("");
+  var [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [msg, setMsg] = useState("");
 
   function handlerLogin(e: any) {
     e.preventDefault();
+
+    email = email.toLowerCase();
+
+    console.log(email);
     login(email, password);
     setTimeout(() => {
       let token = getSessionItem(TOKEN);
