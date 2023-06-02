@@ -24,8 +24,8 @@ export function Search() {
     search2: "",
     petSexOptions: "",
     petAge: 0,
-    petStartWeight: Number,
-    petEndWeight: Number,
+    petStartWeight: 0,
+    petEndWeight: 100,
     petLocation: "",
     petOptions: "",
   });
