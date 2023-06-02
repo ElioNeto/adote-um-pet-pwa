@@ -26,10 +26,18 @@ export function Details() {
   const [race, setRace] = useState();
   const [weight, setWeight] = useState();
   const [bio, setBio] = useState();
+  const [showPopup, setShowPopup] = useState(false);
   //const [owner, setOwner] = useState();
   let { id } = useParams();
 
   let user = getSessionItem(USER)!;
+
+  const showSuccessPopup = () => {
+    setShowPopup(true);
+    setTimeout(() => {
+      setShowPopup(false);
+    }, 3000); // Popup will disappear after 3 seconds
+  };
 
   useEffect(() => {
     if (!authValidate()) redirect("/");
@@ -111,19 +119,24 @@ export function Details() {
             </div>
           </div>
         </>
-
         <div className="bio" id="bio">
           {bio}
         </div>
+        {showPopup && (
+          <div className="popup">
+            <span>Você demonstrou interesse com sucesso</span>
+          </div>
+        )}
         <button
           className="profile-button"
           onClick={() => {
-            //redirect("/chats");
+            showSuccessPopup();
           }}
         >
           Tenho interesse
         </button>
       </div>
     </div>
+    
   );
 }
