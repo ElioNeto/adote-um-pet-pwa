@@ -26,3 +26,18 @@
 .header-icon {
   color: #ff4646;
 }
+
+.popup-container {
+  position: fixed;
+  top: 60px; /* Adjust this value to position the popup properly */
+  right: 20px; /* Adjust this value to position the popup properly */
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  z-index: 999;
+}
+
+.popup-message {
+  margin: 0;
+}
