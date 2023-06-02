@@ -93,7 +93,7 @@ export function Details() {
     <div className="detail-container">
       <Header location="/home" showLike={true} user={user} pet={id} />
       <div className="image">
-        <img src={image} alt="gato ioda" />
+        <img src={image}  />
       </div>
       <div className="slider-container">
         <div className="name-age">
